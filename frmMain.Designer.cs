@@ -30,6 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.meuInvoiceBill = new System.Windows.Forms.ToolStripMenuItem();
+            this.按单快速开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.按客户汇总开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.负数发票开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuInvoiceManager = new System.Windows.Forms.ToolStripMenuItem();
             this.menuInvoicePrint = new System.Windows.Forms.ToolStripMenuItem();
             this.menuConfig = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,10 +65,34 @@
             // 
             // meuInvoiceBill
             // 
+            this.meuInvoiceBill.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.按单快速开票ToolStripMenuItem,
+            this.按客户汇总开票ToolStripMenuItem,
+            this.负数发票开票ToolStripMenuItem});
             this.meuInvoiceBill.Name = "meuInvoiceBill";
             this.meuInvoiceBill.Size = new System.Drawing.Size(68, 21);
             this.meuInvoiceBill.Text = "开具发票";
             this.meuInvoiceBill.Click += new System.EventHandler(this.meuInvoiceBill_Click);
+            // 
+            // 按单快速开票ToolStripMenuItem
+            // 
+            this.按单快速开票ToolStripMenuItem.Name = "按单快速开票ToolStripMenuItem";
+            this.按单快速开票ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.按单快速开票ToolStripMenuItem.Text = "按单快速开票";
+            this.按单快速开票ToolStripMenuItem.Click += new System.EventHandler(this.按单快速开票ToolStripMenuItem_Click);
+            // 
+            // 按客户汇总开票ToolStripMenuItem
+            // 
+            this.按客户汇总开票ToolStripMenuItem.Name = "按客户汇总开票ToolStripMenuItem";
+            this.按客户汇总开票ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.按客户汇总开票ToolStripMenuItem.Text = "按客户汇总开票";
+            this.按客户汇总开票ToolStripMenuItem.Click += new System.EventHandler(this.按客户汇总开票ToolStripMenuItem_Click);
+            // 
+            // 负数发票开票ToolStripMenuItem
+            // 
+            this.负数发票开票ToolStripMenuItem.Name = "负数发票开票ToolStripMenuItem";
+            this.负数发票开票ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.负数发票开票ToolStripMenuItem.Text = "负数发票开票";
             // 
             // menuInvoiceManager
             // 
@@ -230,5 +257,8 @@
         private System.Windows.Forms.Label lblTaxNo;
         private System.Windows.Forms.Label lblTaxNumber;
         private System.Windows.Forms.Label lblOpenTime;
+        private System.Windows.Forms.ToolStripMenuItem 按单快速开票ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 按客户汇总开票ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 负数发票开票ToolStripMenuItem;
     }
 }

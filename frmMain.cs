@@ -35,14 +35,7 @@ namespace InvoiceBill
         }
         private void meuInvoiceBill_Click(object sender, EventArgs e)
         {
-            frmInvoiceBill ofrmInvoiceBill = new frmInvoiceBill();            
-
-            //CreateForm("frmInvoiceBill", "InvoiceBill");
-            ofrmInvoiceBill.TopLevel = false;
-            ofrmInvoiceBill.Dock = DockStyle.Fill;
-            ofrmInvoiceBill.Parent = panel2;
-            ofrmInvoiceBill.BringToFront();
-            ofrmInvoiceBill.Show();
+            //
         }
 
         private void menuInvoiceManager_Click(object sender, EventArgs e)
@@ -110,19 +103,20 @@ namespace InvoiceBill
                         (oComTaxCard._OpenTaxInfo.iIsRepReached == 0 ? "，未到抄税期" : "，已到抄税期") + 
                         (oComTaxCard._OpenTaxInfo.iIsLockReached == 0 ? "，未到锁死期" : "，已到锁死期");
 
-                oComTaxCard.GetStockInfo(0);//专业发票
-                lblSpecial.Text = "专票剩余份数 " + oComTaxCard._StockTaxInfoPro.iInvStock.ToString() + "，将要开具的发票号码为 " + oComTaxCard._StockTaxInfoPro.sInfoTypeCode;
+                oComTaxCard.GetStockInfo(0);//专用发票
+                lblSpecial.Text = "专票剩余份数 " + oComTaxCard._StockTaxInfoPro.iInvStock.ToString() + "，将要开具的发票号码为 " + oComTaxCard._StockTaxInfoPro.iInfoNumber.ToString();
 
                 oComTaxCard.GetStockInfo(2);//普通发票
-                lblCom.Text = "普票剩余份数 " + oComTaxCard._StockTaxInfoPro.iInvStock.ToString() + "，将要开具的发票号码为 " + oComTaxCard._StockTaxInfoPro.sInfoTypeCode;
+                lblCom.Text = "普票剩余份数 " + oComTaxCard._StockTaxInfoPro.iInvStock.ToString() + "，将要开具的发票号码为 " + oComTaxCard._StockTaxInfoPro.iInfoNumber.ToString();
+
+                btnClose.Enabled = true;
+                btnOpen.Enabled = false;
             }
             else MessageBox.Show(oComTaxCard.sRetMsg, "错误", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
-            oComTaxCard.GetStockInfo(0);
+ //           oComTaxCard.GetStockInfo(0);
 
-            oComTaxCard.GetStockInfo(2);
+ //           oComTaxCard.GetStockInfo(2);
 
-            btnClose.Enabled = true;
-            btnOpen.Enabled = false;
         }
 
         private void TaxClose()
@@ -138,6 +132,32 @@ namespace InvoiceBill
         private void btnClose_Click(object sender, EventArgs e)
         {
             TaxClose();
+        }
+
+        private void 按单快速开票ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInvoiceBill ofrmInvoiceBill = new frmInvoiceBill();
+
+            //CreateForm("frmInvoiceBill", "InvoiceBill");
+            ofrmInvoiceBill.TopLevel = false;
+            ofrmInvoiceBill.Dock = DockStyle.Fill;
+            ofrmInvoiceBill.Parent = panel2;
+            ofrmInvoiceBill.BringToFront();
+            ofrmInvoiceBill.Show();
+        }
+
+        private void 按客户汇总开票ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            frmBillSum ofrmBillSum = new frmBillSum();
+
+            //CreateForm("frmInvoiceBill", "InvoiceBill");
+            ofrmBillSum.TopLevel = false;
+            ofrmBillSum.Dock = DockStyle.Fill;
+            ofrmBillSum.Parent = panel2;
+            ofrmBillSum.BringToFront();
+            ofrmBillSum.Show();
         }
     }
 }

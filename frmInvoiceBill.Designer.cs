@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbbBillMode = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCashier = new System.Windows.Forms.TextBox();
@@ -56,10 +58,12 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.gColNotes = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -68,6 +72,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.cbbBillMode);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtCashier);
@@ -92,10 +98,27 @@
             this.panel1.Size = new System.Drawing.Size(1162, 100);
             this.panel1.TabIndex = 0;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(580, 62);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "开票模式：";
+            // 
+            // cbbBillMode
+            // 
+            this.cbbBillMode.FormattingEnabled = true;
+            this.cbbBillMode.Location = new System.Drawing.Point(648, 57);
+            this.cbbBillMode.Name = "cbbBillMode";
+            this.cbbBillMode.Size = new System.Drawing.Size(121, 20);
+            this.cbbBillMode.TabIndex = 19;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(916, 60);
+            this.label7.Location = new System.Drawing.Point(912, 26);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 18;
@@ -104,7 +127,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(790, 63);
+            this.label6.Location = new System.Drawing.Point(786, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 17;
@@ -112,14 +135,14 @@
             // 
             // txtCashier
             // 
-            this.txtCashier.Location = new System.Drawing.Point(967, 55);
+            this.txtCashier.Location = new System.Drawing.Point(963, 21);
             this.txtCashier.Name = "txtCashier";
             this.txtCashier.Size = new System.Drawing.Size(67, 21);
             this.txtCashier.TabIndex = 16;
             // 
             // txtChecker
             // 
-            this.txtChecker.Location = new System.Drawing.Point(840, 57);
+            this.txtChecker.Location = new System.Drawing.Point(836, 23);
             this.txtChecker.Name = "txtChecker";
             this.txtChecker.Size = new System.Drawing.Size(67, 21);
             this.txtChecker.TabIndex = 15;
@@ -127,7 +150,7 @@
             // chkShowPrint
             // 
             this.chkShowPrint.AutoSize = true;
-            this.chkShowPrint.Location = new System.Drawing.Point(664, 58);
+            this.chkShowPrint.Location = new System.Drawing.Point(868, 56);
             this.chkShowPrint.Name = "chkShowPrint";
             this.chkShowPrint.Size = new System.Drawing.Size(120, 16);
             this.chkShowPrint.TabIndex = 14;
@@ -137,7 +160,7 @@
             // chkPrint
             // 
             this.chkPrint.AutoSize = true;
-            this.chkPrint.Location = new System.Drawing.Point(582, 59);
+            this.chkPrint.Location = new System.Drawing.Point(786, 57);
             this.chkPrint.Name = "chkPrint";
             this.chkPrint.Size = new System.Drawing.Size(72, 16);
             this.chkPrint.TabIndex = 13;
@@ -268,6 +291,8 @@
             this.gridColumn5,
             this.gridColumn6,
             this.gridColumn7,
+            this.gridColumn2,
+            this.gridColumn1,
             this.gridColumn8,
             this.gridColumn9,
             this.gColNotes});
@@ -288,6 +313,7 @@
             // gColCustName
             // 
             this.gColCustName.Caption = "往来单位";
+            this.gColCustName.FieldName = "CUSTNAME";
             this.gColCustName.Name = "gColCustName";
             this.gColCustName.Visible = true;
             this.gColCustName.VisibleIndex = 2;
@@ -295,6 +321,7 @@
             // gColBseqId
             // 
             this.gColBseqId.Caption = "票据流水";
+            this.gColBseqId.FieldName = "BSEQID";
             this.gColBseqId.Name = "gColBseqId";
             this.gColBseqId.Visible = true;
             this.gColBseqId.VisibleIndex = 3;
@@ -302,13 +329,15 @@
             // gColAmount
             // 
             this.gColAmount.Caption = "金额";
+            this.gColAmount.FieldName = "AMOUNT";
             this.gColAmount.Name = "gColAmount";
             this.gColAmount.Visible = true;
             this.gColAmount.VisibleIndex = 4;
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "贱配时间";
+            this.gridColumn5.Caption = "捡配时间";
+            this.gridColumn5.FieldName = "EndDate";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
@@ -316,6 +345,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "开票抬头";
+            this.gridColumn6.FieldName = "CUSTNAME";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 6;
@@ -323,23 +353,50 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "税号";
+            this.gridColumn7.FieldName = "BSEQID";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.VisibleIndex = 9;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "开户行";
+            this.gridColumn2.FieldName = "BANKNAME";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 7;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "银行账号";
+            this.gridColumn1.FieldName = "BANKACCOUNT";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 8;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "地址";
+            this.gridColumn8.FieldName = "BANKNAME";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.VisibleIndex = 10;
             // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "电话";
+            this.gridColumn9.FieldName = "CONTACTPHONE";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 10;
+            this.gridColumn9.VisibleIndex = 12;
+            // 
+            // gColNotes
+            // 
+            this.gColNotes.Caption = "备注";
+            this.gColNotes.FieldName = "NOTES";
+            this.gColNotes.Name = "gColNotes";
+            this.gColNotes.Visible = true;
+            this.gColNotes.VisibleIndex = 11;
             // 
             // panel2
             // 
@@ -350,14 +407,6 @@
             this.panel2.Size = new System.Drawing.Size(1162, 353);
             this.panel2.TabIndex = 2;
             // 
-            // gColNotes
-            // 
-            this.gColNotes.Caption = "备注";
-            this.gColNotes.FieldName = "NOTES";
-            this.gColNotes.Name = "gColNotes";
-            this.gColNotes.Visible = true;
-            this.gColNotes.VisibleIndex = 9;
-            // 
             // frmInvoiceBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -366,7 +415,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmInvoiceBill";
-            this.Text = "增值税发票开票";
+            this.Text = "增值税发票开票（按单开票）";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -410,5 +459,9 @@
         private System.Windows.Forms.TextBox txtCashier;
         private System.Windows.Forms.TextBox txtChecker;
         private DevExpress.XtraGrid.Columns.GridColumn gColNotes;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbbBillMode;
     }
 }

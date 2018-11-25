@@ -23,6 +23,7 @@ namespace InvoiceBill
             InitializeComponent();
 
             fLoadInvoiceType();
+            fLoadBillMode();
         }
 
         private void fLoadInvoiceType()
@@ -33,6 +34,17 @@ namespace InvoiceBill
             cbbInvType.DataSource = GetDataTable(sInvoiceSql);
             cbbInvType.ValueMember = "INVTYPEID";
             cbbInvType.DisplayMember = "INVTYPENAME";
+
+        }
+
+        private void fLoadBillMode()
+        {
+            string sInvoiceSql =
+                "SELECT INVBILLMODEID,InvBillMode FROM T_Inv_BillMode ";
+
+            cbbBillMode.DataSource = GetDataTable(sInvoiceSql);
+            cbbBillMode.ValueMember = "INVBILLMODEID";
+            cbbBillMode.DisplayMember = "InvBillMode";
 
         }
 
@@ -62,14 +74,14 @@ namespace InvoiceBill
             string sInvTypeId = cbbInvType.SelectedValue.ToString();
 
             string spName = "p_Get_Pending_Inv";
-            string sDateFrom = dtpBeginDate.Value.ToString("yyyyMMdd");            
-            string sDateTo = dtpEndDate.Value.ToString("yyyyMMdd");
+            string sDateFrom = dtpBeginDate.Value.ToString("yyyy-MM-dd");            
+            string sDateTo = dtpEndDate.Value.ToString("yyyy-MM-dd");
 
-            string[] sParameters = new string[4] { "@InvType", "@CustName", "@BeginDate", "@EndDate" };
+            string[] sParameters = new string[5] { "@BillMode", "@InvTypeId", "@CustName", "@BeginDate", "@EndDate" };
 
-            string[] sParametersValue = new string[4] { sInvTypeId.ToString(),sCustId, sDateFrom, sDateTo};
-            string[] sParametersType = new string[4] { "VarChar", "VarChar", "VarChar", "VarChar" };
-            string[] sParametersDirection = new string[4] { "Input", "Input", "Input", "Input" };
+            string[] sParametersValue = new string[5] {"", sInvTypeId.ToString(),sCustId, sDateFrom, sDateTo};
+            string[] sParametersType = new string[5] { "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[5] { "Input", "Input", "Input", "Input", "Input" };
 
             gridControl1.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
         }
