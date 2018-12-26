@@ -119,7 +119,7 @@ namespace InvoiceBill
             frmMain.oComTaxCard._InvocieHeader.sInfoClientAddressPhone = Convert.ToString(row["ADDRESS"]) + Convert.ToString(row["CONTACTPHONE"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoSellerBankAccount = "江南农村商业银行大学城支行 88801019012010000001281";
             frmMain.oComTaxCard._InvocieHeader.sInfoSellerAddressPhone = "江苏省常州市武进经济开发区长扬路15号 0519-69698289";
-            //frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = iTaxRate;
+            frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = 16; //此处税率是否可以为空，多税率如何处理
             frmMain.oComTaxCard._InvocieHeader.sInfoNotes = Convert.ToString(row["NOTES"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoInvoicer = ""; //开票员
             frmMain.oComTaxCard._InvocieHeader.sInfoChecker = txtChecker.Text.Trim(); //复核员
@@ -135,13 +135,13 @@ namespace InvoiceBill
             string sBseqId = row["BSEQID"].ToString();
             DataTable myDt = new DataTable();
 
-            string spName = "sp_get_pending_invDetail";
+            string spName = "p_Get_Pending_Inv_Detail";
 
-            string[] sParameters = new string[2] { "anFinseqId", "aors" };
+            string[] sParameters = new string[2] { "@BseqId", "@InvType"};
 
-            string[] sParametersValue = new string[2] { sBseqId, "" };
-            string[] sParametersType = new string[2] { "Varchar2", "RefCursor" };
-            string[] sParametersDirection = new string[2] { "Input", "Output" };
+            string[] sParametersValue = new string[2] { sBseqId, cbbInvType.SelectedValue.ToString()};
+            string[] sParametersType = new string[2] { "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[2] { "Input", "Input" };
 
             myDt = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
             int iTaxDetailCount = myDt.Rows.Count;
@@ -172,7 +172,7 @@ namespace InvoiceBill
             string[] sParameters = new string[5] {"@BseqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
 
             string[] sParametersValue = new string[5] { sBseqId, sInvoiceCode, sInvoiceNo, "0", sRetMsg };
-            string[] sParametersType = new string[5] { "Varchar2", "Varchar2", "Varchar2", "Varchar2", "Varchar2" };
+            string[] sParametersType = new string[5] { "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[5] { "Input", "Input", "Input", "Input", "Output" };
 
             iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection));
@@ -191,10 +191,11 @@ namespace InvoiceBill
 
                 iCurrentBseqId = Convert.ToString(row["BSEQID"]);
 
-                //if (frmMain.oComTaxCard.InvoiceBillHeader() ==1) MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
-                //if (frmMain.oComTaxCard.InvoiceBillDetail() == 1) MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
+                if (InvoiceBillHeader(iCurrentItemId) ==1) MessageBox.Show(sRetMsg);
+                if (InvoiceBillDetail(iCurrentItemId) == 1) MessageBox.Show(sRetMsg);
 
-                if (frmMain.oComTaxCard.InvoiceBill() == 1) MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
+                if (frmMain.oComTaxCard.InvoiceBill() == 1)  MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
+                else
                 if (InvoiceValidated(iCurrentBseqId, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()) == 1) MessageBox.Show(sRetMsg);
 
             }
@@ -223,6 +224,16 @@ namespace InvoiceBill
                 pObj_Comm.Close();
                 throw ex;
             }
+        }
+
+        private void cbbInvType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbInvType.SelectedValue.ToString() == "1")
+            {
+                frmMain.oComTaxCard.iInvType = 0;
+            }
+            else
+                frmMain.oComTaxCard.iInvType = 2;
         }
     }
 

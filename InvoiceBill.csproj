@@ -32,15 +32,23 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>20181126085336769_easyicon_net_48.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPivotGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,6 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base64.cs" />
+    <Compile Include="Basic\ComStruct.cs" />
+    <Compile Include="Basic\frmSelectData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmSelectData.Designer.cs">
+      <DependentUpon>frmSelectData.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAO\CommonDataConfig.cs" />
     <Compile Include="DAO\CommonFactory.cs" />
     <Compile Include="DAO\CommonInterface.cs" />
@@ -88,6 +103,12 @@
     <Compile Include="frmInvoiceBill.Designer.cs">
       <DependentUpon>frmInvoiceBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmInvoiceByCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoiceByCust.Designer.cs">
+      <DependentUpon>frmInvoiceByCust.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInvoiceManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,8 +133,17 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPrintWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintWeb.Designer.cs">
+      <DependentUpon>frmPrintWeb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Basic\frmSelectData.resx">
+      <DependentUpon>frmSelectData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBillSum.resx">
       <DependentUpon>frmBillSum.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceBill.resx">
       <DependentUpon>frmInvoiceBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoiceByCust.resx">
+      <DependentUpon>frmInvoiceByCust.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceManager.resx">
       <DependentUpon>frmInvoiceManager.cs</DependentUpon>
@@ -135,7 +168,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="frmPrintWeb.resx">
+      <DependentUpon>frmPrintWeb.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -159,6 +194,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="20181126085336769_easyicon_net_48.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

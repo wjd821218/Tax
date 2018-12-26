@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaxDll;
+using DevExpress.XtraEditors;
+using DevExpress.Skins;
 
 namespace InvoiceBill
 {
@@ -44,23 +46,23 @@ namespace InvoiceBill
             //ofrmInvoiceManager.Show();
             //CreateForm("frmInvoiceManager", "InvoiceBill");
 
-            ofrmInvoiceManager.TopLevel = false;
+            /*ofrmInvoiceManager.TopLevel = false;
             ofrmInvoiceManager.Dock = DockStyle.Fill;
             ofrmInvoiceManager.Parent = panel2;
             ofrmInvoiceManager.BringToFront();
-            ofrmInvoiceManager.Show();
+            ofrmInvoiceManager.Show();*/
         }
 
         private void menuInvoicePrint_Click(object sender, EventArgs e)
         {
-            frmInvoicePrint ofrmInvoicePrint = new frmInvoicePrint();
+            //frmInvoicePrint ofrmInvoicePrint = new frmInvoicePrint();
             //ofrmInvoicePrint.Show();
 
-            ofrmInvoicePrint.TopLevel = false;
-            ofrmInvoicePrint.Dock = DockStyle.Fill;
-            ofrmInvoicePrint.Parent = panel2;
-            ofrmInvoicePrint.BringToFront();
-            ofrmInvoicePrint.Show();
+            //ofrmInvoicePrint.TopLevel = false;
+            //ofrmInvoicePrint.Dock = DockStyle.Fill;
+            //ofrmInvoicePrint.Parent = panel2;
+            //ofrmInvoicePrint.BringToFront();
+            //ofrmInvoicePrint.Show();
 
             //CreateForm("InvoiceBill.frmInvoicePrint", "InvoiceBill");
         }
@@ -158,6 +160,59 @@ namespace InvoiceBill
             ofrmBillSum.Parent = panel2;
             ofrmBillSum.BringToFront();
             ofrmBillSum.Show();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            foreach (SkinContainer cnt in SkinManager.Default.Skins)
+            {
+                cbbSkin.Properties.Items.Add(cnt.SkinName);
+            }
+        }
+
+        private void cbbSkin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBoxEdit comboBox = sender as ComboBoxEdit;
+            string skinName = comboBox.Text;
+            DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = skinName;
+        }
+
+        private void 销售发票开票ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInvoiceByCust ofrmInvoiceByCust = new frmInvoiceByCust();
+
+            //CreateForm("frmInvoiceBill", "InvoiceBill");
+            ofrmInvoiceByCust.TopLevel = false;
+            ofrmInvoiceByCust.Dock = DockStyle.Fill;
+            ofrmInvoiceByCust.Parent = panel2;
+            ofrmInvoiceByCust.BringToFront();
+            ofrmInvoiceByCust.Show();
+
+        }
+
+        private void 远程打印ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            frmPrintWeb ofrmPrintWeb = new frmPrintWeb();
+
+            //CreateForm("frmInvoiceBill", "InvoiceBill");
+            ofrmPrintWeb.TopLevel = false;
+            ofrmPrintWeb.Dock = DockStyle.Fill;
+            ofrmPrintWeb.Parent = panel2;
+            ofrmPrintWeb.BringToFront();
+            ofrmPrintWeb.Show();
+        }
+
+        private void 发票作废ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmInvoiceManager OfrmInvoiceManager = new frmInvoiceManager();
+
+            OfrmInvoiceManager.TopLevel = false;
+            OfrmInvoiceManager.Dock = DockStyle.Fill;
+            OfrmInvoiceManager.Parent = panel2;
+            OfrmInvoiceManager.BringToFront();
+            OfrmInvoiceManager.Show();
         }
     }
 }

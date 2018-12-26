@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInvoiceBill));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.cbbBillMode = new System.Windows.Forms.ComboBox();
@@ -56,7 +57,7 @@
             this.gColBseqId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColTaxCustName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -194,6 +195,7 @@
             this.cbbInvType.Name = "cbbInvType";
             this.cbbInvType.Size = new System.Drawing.Size(121, 20);
             this.cbbInvType.TabIndex = 10;
+            this.cbbInvType.SelectedIndexChanged += new System.EventHandler(this.cbbInvType_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -283,13 +285,15 @@
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gridView1.Appearance.Row.Options.UseBackColor = true;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColDept,
             this.gColCustName,
             this.gColBseqId,
             this.gColAmount,
             this.gridColumn5,
-            this.gridColumn6,
+            this.gColTaxCustName,
             this.gridColumn7,
             this.gridColumn2,
             this.gridColumn1,
@@ -342,18 +346,18 @@
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
             // 
-            // gridColumn6
+            // gColTaxCustName
             // 
-            this.gridColumn6.Caption = "开票抬头";
-            this.gridColumn6.FieldName = "CUSTNAME";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gColTaxCustName.Caption = "开票抬头";
+            this.gColTaxCustName.FieldName = "TAXCUSTNAME";
+            this.gColTaxCustName.Name = "gColTaxCustName";
+            this.gColTaxCustName.Visible = true;
+            this.gColTaxCustName.VisibleIndex = 6;
             // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "税号";
-            this.gridColumn7.FieldName = "BSEQID";
+            this.gridColumn7.FieldName = "TAXNO";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 9;
@@ -377,7 +381,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "地址";
-            this.gridColumn8.FieldName = "BANKNAME";
+            this.gridColumn8.FieldName = "ADDRESS";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 10;
@@ -414,6 +418,7 @@
             this.ClientSize = new System.Drawing.Size(1162, 453);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmInvoiceBill";
             this.Text = "增值税发票开票（按单开票）";
             this.panel1.ResumeLayout(false);
@@ -450,7 +455,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColBseqId;
         private DevExpress.XtraGrid.Columns.GridColumn gColAmount;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gColTaxCustName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;

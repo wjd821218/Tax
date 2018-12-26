@@ -1,0 +1,800 @@
+﻿namespace InvoiceBill
+{
+    partial class frmInvoiceByCust
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInvoiceByCust));
+            this.adornerUIManager1 = new DevExpress.Utils.VisualEffects.AdornerUIManager(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tbtnAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.txtAddress = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
+            this.txtBank = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.txtTaxNo = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.txtInvCust = new DevExpress.XtraEditors.TextEdit();
+            this.txtNote = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.chkPrint = new DevExpress.XtraEditors.CheckEdit();
+            this.cbbInvType = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.txtNo = new DevExpress.XtraEditors.TextEdit();
+            this.txtCust = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.dtpTo = new DevExpress.XtraEditors.DateEdit();
+            this.dtpFrom = new DevExpress.XtraEditors.DateEdit();
+            this.txtDept = new DevExpress.XtraEditors.ButtonEdit();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
+            this.pnlDetail = new DevExpress.XtraEditors.PanelControl();
+            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColDBseqId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColiLineNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColBillTypeId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColArtId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColSpec = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColFactory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColInvTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDInvAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPengingTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDPendingAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.pnlHeader = new DevExpress.XtraEditors.PanelControl();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColBseqId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColCustId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColCustName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPengingAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColInvAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColBillDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            ((System.ComponentModel.ISupportInitialize)(this.adornerUIManager1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBank.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvCust.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNote.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPrint.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbInvType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCust.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpTo.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpFrom.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlDetail)).BeginInit();
+            this.pnlDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlHeader)).BeginInit();
+            this.pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // adornerUIManager1
+            // 
+            this.adornerUIManager1.Owner = this;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbtnAdd,
+            this.toolStripButton2,
+            this.toolStripButton3,
+            this.toolStripSeparator1,
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(931, 40);
+            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tbtnAdd
+            // 
+            this.tbtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("tbtnAdd.Image")));
+            this.tbtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnAdd.Name = "tbtnAdd";
+            this.tbtnAdd.Size = new System.Drawing.Size(36, 37);
+            this.tbtnAdd.Text = "新增";
+            this.tbtnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(36, 37);
+            this.toolStripButton2.Text = "删除";
+            this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(36, 37);
+            this.toolStripButton3.Text = "保存";
+            this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 40);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 37);
+            this.toolStripButton1.Text = "关闭";
+            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.labelControl11);
+            this.panelControl1.Controls.Add(this.txtAddress);
+            this.panelControl1.Controls.Add(this.labelControl10);
+            this.panelControl1.Controls.Add(this.txtBank);
+            this.panelControl1.Controls.Add(this.labelControl9);
+            this.panelControl1.Controls.Add(this.txtTaxNo);
+            this.panelControl1.Controls.Add(this.labelControl8);
+            this.panelControl1.Controls.Add(this.txtInvCust);
+            this.panelControl1.Controls.Add(this.txtNote);
+            this.panelControl1.Controls.Add(this.labelControl7);
+            this.panelControl1.Controls.Add(this.chkPrint);
+            this.panelControl1.Controls.Add(this.cbbInvType);
+            this.panelControl1.Controls.Add(this.labelControl6);
+            this.panelControl1.Controls.Add(this.labelControl5);
+            this.panelControl1.Controls.Add(this.txtNo);
+            this.panelControl1.Controls.Add(this.txtCust);
+            this.panelControl1.Controls.Add(this.labelControl4);
+            this.panelControl1.Controls.Add(this.labelControl3);
+            this.panelControl1.Controls.Add(this.labelControl2);
+            this.panelControl1.Controls.Add(this.labelControl1);
+            this.panelControl1.Controls.Add(this.dtpTo);
+            this.panelControl1.Controls.Add(this.dtpFrom);
+            this.panelControl1.Controls.Add(this.txtDept);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(0, 40);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(931, 130);
+            this.panelControl1.TabIndex = 1;
+            // 
+            // labelControl11
+            // 
+            this.labelControl11.Location = new System.Drawing.Point(698, 69);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(60, 14);
+            this.labelControl11.TabIndex = 23;
+            this.labelControl11.Text = "地址电话：";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(757, 69);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtAddress.TabIndex = 22;
+            // 
+            // labelControl10
+            // 
+            this.labelControl10.Location = new System.Drawing.Point(515, 69);
+            this.labelControl10.Name = "labelControl10";
+            this.labelControl10.Size = new System.Drawing.Size(84, 14);
+            this.labelControl10.TabIndex = 21;
+            this.labelControl10.Text = "开户行及账号：";
+            // 
+            // txtBank
+            // 
+            this.txtBank.Location = new System.Drawing.Point(597, 66);
+            this.txtBank.Name = "txtBank";
+            this.txtBank.Size = new System.Drawing.Size(100, 20);
+            this.txtBank.TabIndex = 20;
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Location = new System.Drawing.Point(344, 66);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(36, 14);
+            this.labelControl9.TabIndex = 19;
+            this.labelControl9.Text = "税号：";
+            // 
+            // txtTaxNo
+            // 
+            this.txtTaxNo.Location = new System.Drawing.Point(370, 67);
+            this.txtTaxNo.Name = "txtTaxNo";
+            this.txtTaxNo.Size = new System.Drawing.Size(126, 20);
+            this.txtTaxNo.TabIndex = 18;
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Location = new System.Drawing.Point(3, 69);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(60, 14);
+            this.labelControl8.TabIndex = 17;
+            this.labelControl8.Text = "开票抬头：";
+            // 
+            // txtInvCust
+            // 
+            this.txtInvCust.Location = new System.Drawing.Point(59, 69);
+            this.txtInvCust.Name = "txtInvCust";
+            this.txtInvCust.Size = new System.Drawing.Size(279, 20);
+            this.txtInvCust.TabIndex = 16;
+            // 
+            // txtNote
+            // 
+            this.txtNote.Location = new System.Drawing.Point(59, 96);
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(798, 20);
+            this.txtNote.TabIndex = 15;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Location = new System.Drawing.Point(13, 96);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(36, 14);
+            this.labelControl7.TabIndex = 14;
+            this.labelControl7.Text = "备注：";
+            // 
+            // chkPrint
+            // 
+            this.chkPrint.Location = new System.Drawing.Point(669, 39);
+            this.chkPrint.Name = "chkPrint";
+            this.chkPrint.Properties.Caption = "是否打印";
+            this.chkPrint.Size = new System.Drawing.Size(75, 19);
+            this.chkPrint.TabIndex = 13;
+            // 
+            // cbbInvType
+            // 
+            this.cbbInvType.Location = new System.Drawing.Point(736, 10);
+            this.cbbInvType.Name = "cbbInvType";
+            this.cbbInvType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbInvType.Properties.Items.AddRange(new object[] {
+            "专用发票",
+            "普通发票"});
+            this.cbbInvType.Size = new System.Drawing.Size(121, 20);
+            this.cbbInvType.TabIndex = 12;
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Location = new System.Drawing.Point(669, 13);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(60, 14);
+            this.labelControl6.TabIndex = 11;
+            this.labelControl6.Text = "发票类别：";
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Location = new System.Drawing.Point(494, 37);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(36, 14);
+            this.labelControl5.TabIndex = 10;
+            this.labelControl5.Text = "单号：";
+            // 
+            // txtNo
+            // 
+            this.txtNo.Location = new System.Drawing.Point(545, 37);
+            this.txtNo.Name = "txtNo";
+            this.txtNo.Size = new System.Drawing.Size(100, 20);
+            this.txtNo.TabIndex = 9;
+            // 
+            // txtCust
+            // 
+            this.txtCust.Location = new System.Drawing.Point(59, 40);
+            this.txtCust.Name = "txtCust";
+            this.txtCust.Size = new System.Drawing.Size(411, 20);
+            this.txtCust.TabIndex = 8;
+            this.txtCust.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCust_KeyPress);
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(13, 40);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(36, 14);
+            this.labelControl4.TabIndex = 6;
+            this.labelControl4.Text = "客户：";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(488, 8);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(60, 14);
+            this.labelControl3.TabIndex = 5;
+            this.labelControl3.Text = "结束日期：";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(304, 10);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(60, 14);
+            this.labelControl2.TabIndex = 4;
+            this.labelControl2.Text = "开始日期：";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(12, 8);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(36, 14);
+            this.labelControl1.TabIndex = 3;
+            this.labelControl1.Text = "部门：";
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.EditValue = null;
+            this.dtpTo.Location = new System.Drawing.Point(545, 8);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpTo.Size = new System.Drawing.Size(100, 20);
+            this.dtpTo.TabIndex = 2;
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.EditValue = null;
+            this.dtpFrom.Location = new System.Drawing.Point(370, 8);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtpFrom.Size = new System.Drawing.Size(100, 20);
+            this.dtpFrom.TabIndex = 1;
+            // 
+            // txtDept
+            // 
+            this.txtDept.Location = new System.Drawing.Point(59, 8);
+            this.txtDept.Name = "txtDept";
+            this.txtDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.txtDept.Size = new System.Drawing.Size(142, 20);
+            this.txtDept.TabIndex = 0;
+            this.txtDept.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txtDept_ButtonClick);
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.splitterControl1);
+            this.panelControl2.Controls.Add(this.pnlDetail);
+            this.panelControl2.Controls.Add(this.pnlHeader);
+            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl2.Location = new System.Drawing.Point(0, 170);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(931, 382);
+            this.panelControl2.TabIndex = 2;
+            // 
+            // splitterControl1
+            // 
+            this.splitterControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitterControl1.Location = new System.Drawing.Point(2, 170);
+            this.splitterControl1.Name = "splitterControl1";
+            this.splitterControl1.Size = new System.Drawing.Size(927, 5);
+            this.splitterControl1.TabIndex = 2;
+            this.splitterControl1.TabStop = false;
+            // 
+            // pnlDetail
+            // 
+            this.pnlDetail.Controls.Add(this.gridControl2);
+            this.pnlDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDetail.Location = new System.Drawing.Point(2, 170);
+            this.pnlDetail.Name = "pnlDetail";
+            this.pnlDetail.Size = new System.Drawing.Size(927, 210);
+            this.pnlDetail.TabIndex = 1;
+            // 
+            // gridControl2
+            // 
+            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl2.Location = new System.Drawing.Point(2, 2);
+            this.gridControl2.MainView = this.gridView2;
+            this.gridControl2.Name = "gridControl2";
+            this.gridControl2.Size = new System.Drawing.Size(923, 206);
+            this.gridControl2.TabIndex = 0;
+            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColDBseqId,
+            this.gColiLineNo,
+            this.gColBillTypeId,
+            this.gColArtId,
+            this.gColName,
+            this.gColSpec,
+            this.gColFactory,
+            this.gColUnit,
+            this.gridColumn13,
+            this.gColInvTotal,
+            this.gColDInvAmount,
+            this.gColPrice,
+            this.gColDAmount,
+            this.gColPengingTotal,
+            this.gColDPendingAmount});
+            this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.MultiSelect = true;
+            this.gridView2.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView2.OptionsView.ShowFooter = true;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // gColDBseqId
+            // 
+            this.gColDBseqId.Caption = "票据流水";
+            this.gColDBseqId.FieldName = "BSEQID";
+            this.gColDBseqId.Name = "gColDBseqId";
+            this.gColDBseqId.Visible = true;
+            this.gColDBseqId.VisibleIndex = 3;
+            // 
+            // gColiLineNo
+            // 
+            this.gColiLineNo.Caption = "行号";
+            this.gColiLineNo.FieldName = "iLineNo";
+            this.gColiLineNo.Name = "gColiLineNo";
+            this.gColiLineNo.Visible = true;
+            this.gColiLineNo.VisibleIndex = 1;
+            // 
+            // gColBillTypeId
+            // 
+            this.gColBillTypeId.Caption = "票据类型";
+            this.gColBillTypeId.FieldName = "BILLTYPEID";
+            this.gColBillTypeId.Name = "gColBillTypeId";
+            this.gColBillTypeId.Visible = true;
+            this.gColBillTypeId.VisibleIndex = 2;
+            // 
+            // gColArtId
+            // 
+            this.gColArtId.Caption = "商品编码";
+            this.gColArtId.FieldName = "ARTID";
+            this.gColArtId.Name = "gColArtId";
+            this.gColArtId.Visible = true;
+            this.gColArtId.VisibleIndex = 4;
+            // 
+            // gColName
+            // 
+            this.gColName.Caption = "品名";
+            this.gColName.FieldName = "ARTNAME";
+            this.gColName.Name = "gColName";
+            this.gColName.Visible = true;
+            this.gColName.VisibleIndex = 5;
+            // 
+            // gColSpec
+            // 
+            this.gColSpec.Caption = "规格";
+            this.gColSpec.FieldName = "SPEC";
+            this.gColSpec.Name = "gColSpec";
+            this.gColSpec.Visible = true;
+            this.gColSpec.VisibleIndex = 6;
+            // 
+            // gColFactory
+            // 
+            this.gColFactory.Caption = "产地";
+            this.gColFactory.FieldName = "FACTORY";
+            this.gColFactory.Name = "gColFactory";
+            this.gColFactory.Visible = true;
+            this.gColFactory.VisibleIndex = 7;
+            // 
+            // gColUnit
+            // 
+            this.gColUnit.Caption = "单位";
+            this.gColUnit.FieldName = "UNIT";
+            this.gColUnit.Name = "gColUnit";
+            this.gColUnit.Visible = true;
+            this.gColUnit.VisibleIndex = 8;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "选择";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 9;
+            // 
+            // gColInvTotal
+            // 
+            this.gColInvTotal.Caption = "发票数量";
+            this.gColInvTotal.FieldName = "BSNTOTAL";
+            this.gColInvTotal.Name = "gColInvTotal";
+            this.gColInvTotal.Visible = true;
+            this.gColInvTotal.VisibleIndex = 10;
+            // 
+            // gColDInvAmount
+            // 
+            this.gColDInvAmount.Caption = "发票金额";
+            this.gColDInvAmount.FieldName = "AMOUNT";
+            this.gColDInvAmount.Name = "gColDInvAmount";
+            this.gColDInvAmount.Visible = true;
+            this.gColDInvAmount.VisibleIndex = 11;
+            // 
+            // gColPrice
+            // 
+            this.gColPrice.Caption = "平均价格";
+            this.gColPrice.Name = "gColPrice";
+            this.gColPrice.Visible = true;
+            this.gColPrice.VisibleIndex = 12;
+            // 
+            // gColDAmount
+            // 
+            this.gColDAmount.Caption = "票据金额";
+            this.gColDAmount.FieldName = "BSNAMOUNT";
+            this.gColDAmount.Name = "gColDAmount";
+            this.gColDAmount.Visible = true;
+            this.gColDAmount.VisibleIndex = 13;
+            // 
+            // gColPengingTotal
+            // 
+            this.gColPengingTotal.Caption = "未开发票数量";
+            this.gColPengingTotal.FieldName = "TOTAL";
+            this.gColPengingTotal.Name = "gColPengingTotal";
+            this.gColPengingTotal.Visible = true;
+            this.gColPengingTotal.VisibleIndex = 14;
+            // 
+            // gColDPendingAmount
+            // 
+            this.gColDPendingAmount.Caption = "未开发票金额";
+            this.gColDPendingAmount.FieldName = "AMOUNT";
+            this.gColDPendingAmount.Name = "gColDPendingAmount";
+            this.gColDPendingAmount.Visible = true;
+            this.gColDPendingAmount.VisibleIndex = 15;
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.gridControl1);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(2, 2);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(927, 168);
+            this.pnlHeader.TabIndex = 0;
+            // 
+            // gridControl1
+            // 
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.Location = new System.Drawing.Point(2, 2);
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit1});
+            this.gridControl1.Size = new System.Drawing.Size(923, 164);
+            this.gridControl1.TabIndex = 0;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColBseqId,
+            this.gColCustId,
+            this.gColCustName,
+            this.gColPengingAmount,
+            this.gColInvAmount,
+            this.gColBillDate});
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView1.OptionsView.ColumnAutoWidth = false;
+            this.gridView1.OptionsView.ShowFooter = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView1_SelectionChanged);
+            // 
+            // gColBseqId
+            // 
+            this.gColBseqId.Caption = "票据流水";
+            this.gColBseqId.FieldName = "BSEQID";
+            this.gColBseqId.Name = "gColBseqId";
+            this.gColBseqId.Visible = true;
+            this.gColBseqId.VisibleIndex = 1;
+            // 
+            // gColCustId
+            // 
+            this.gColCustId.Caption = "客户编码";
+            this.gColCustId.FieldName = "CUSTID";
+            this.gColCustId.Name = "gColCustId";
+            this.gColCustId.Visible = true;
+            this.gColCustId.VisibleIndex = 2;
+            // 
+            // gColCustName
+            // 
+            this.gColCustName.Caption = "往来单位";
+            this.gColCustName.FieldName = "CUSTNAME";
+            this.gColCustName.Name = "gColCustName";
+            this.gColCustName.Visible = true;
+            this.gColCustName.VisibleIndex = 3;
+            // 
+            // gColPengingAmount
+            // 
+            this.gColPengingAmount.Caption = "未开金额";
+            this.gColPengingAmount.FieldName = "AMOUNT";
+            this.gColPengingAmount.Name = "gColPengingAmount";
+            this.gColPengingAmount.Visible = true;
+            this.gColPengingAmount.VisibleIndex = 4;
+            // 
+            // gColInvAmount
+            // 
+            this.gColInvAmount.Caption = "本次开票金额";
+            this.gColInvAmount.Name = "gColInvAmount";
+            this.gColInvAmount.Visible = true;
+            this.gColInvAmount.VisibleIndex = 5;
+            this.gColInvAmount.Width = 132;
+            // 
+            // gColBillDate
+            // 
+            this.gColBillDate.Caption = "业务日期";
+            this.gColBillDate.FieldName = "BILLDATE";
+            this.gColBillDate.Name = "gColBillDate";
+            this.gColBillDate.Visible = true;
+            this.gColBillDate.VisibleIndex = 6;
+            // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            // 
+            // frmInvoiceByCust
+            // 
+            this.Appearance.BackColor = System.Drawing.Color.White;
+            this.Appearance.BackColor2 = System.Drawing.Color.White;
+            this.Appearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Appearance.Options.UseBackColor = true;
+            this.Appearance.Options.UseBorderColor = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(931, 552);
+            this.Controls.Add(this.panelControl2);
+            this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmInvoiceByCust";
+            this.Text = " ";
+            ((System.ComponentModel.ISupportInitialize)(this.adornerUIManager1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBank.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTaxNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvCust.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNote.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPrint.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbInvType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCust.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtpFrom.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDept.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlDetail)).EndInit();
+            this.pnlDetail.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlHeader)).EndInit();
+            this.pnlHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private DevExpress.Utils.VisualEffects.AdornerUIManager adornerUIManager1;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private DevExpress.XtraEditors.PanelControl pnlDetail;
+        private DevExpress.XtraEditors.PanelControl pnlHeader;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tbtnAdd;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private DevExpress.XtraEditors.SplitterControl splitterControl1;
+        private DevExpress.XtraGrid.GridControl gridControl2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.TextEdit txtNo;
+        private DevExpress.XtraEditors.TextEdit txtCust;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.DateEdit dtpTo;
+        private DevExpress.XtraEditors.DateEdit dtpFrom;
+        private DevExpress.XtraEditors.ButtonEdit txtDept;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbInvType;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.CheckEdit chkPrint;
+        private DevExpress.XtraEditors.TextEdit txtNote;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDBseqId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColArtId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColName;
+        private DevExpress.XtraGrid.Columns.GridColumn gColSpec;
+        private DevExpress.XtraGrid.Columns.GridColumn gColFactory;
+        private DevExpress.XtraGrid.Columns.GridColumn gColUnit;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gColInvTotal;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDInvAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPengingTotal;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDPendingAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gColBseqId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColCustId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColCustName;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPengingAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gColInvAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn gColBillDate;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
+        private DevExpress.XtraEditors.TextEdit txtBank;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.TextEdit txtTaxNo;
+        private DevExpress.XtraEditors.LabelControl labelControl8;
+        private DevExpress.XtraEditors.TextEdit txtInvCust;
+        private DevExpress.XtraEditors.LabelControl labelControl11;
+        private DevExpress.XtraEditors.TextEdit txtAddress;
+        private DevExpress.XtraGrid.Columns.GridColumn gColBillTypeId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColiLineNo;
+    }
+}
