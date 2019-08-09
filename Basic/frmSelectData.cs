@@ -35,7 +35,11 @@ namespace InvoiceBill.Basic
             switch (flag)
             {
                 case ComStruct.selCustomer:    //客户
-                    sSQL = "SELECT CUSTID AS ID,CUSTNAME AS NAME  FROM T_Cust_TaxCode WHERE CUSTNAME LIKE '%" + sFilter + "%'";
+                    sSQL = "SELECT CUSTID AS ID,CUSTNAME AS NAME  FROM T_Cust_TaxCode WHERE CUSTCODE LIKE '%" + sFilter + "%' OR CUSTID = '"+ sFilter  + "' OR CUSTNAME LIKE '%" + sFilter + "%'";
+                    break;
+
+                case ComStruct.selDept:    //客户
+                    sSQL = "SELECT DEPTID AS ID,DEPTNAME AS NAME  FROM t_dept WHERE DEPTID = '"+ sFilter  + "' OR DEPTNAME LIKE '%" + sFilter + "%'";
                     break;
             }
             dtl = GetDataBySelect(sSQL);

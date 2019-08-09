@@ -10,15 +10,21 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using InvoiceBill.DAO;
 using InvoiceBill.Basic;
+using System.IO;
 
 namespace InvoiceBill
 {
     public partial class frmInvoiceByCust : DevExpress.XtraEditors.XtraForm
     {
+        public string sDeptId = "1";
+        public string sDeptName;
         public string sCustId;
         public string sCustName;
         public int iInvseqId = 0;
         public string sRetMsg = "";
+        public string sCurrentInvSeqId = "";
+
+        string fileName = Path.Combine(Application.UserAppDataPath, "GridControlFactoryInvoiceCust.xml");
 
         public frmInvoiceByCust()
         {
@@ -30,18 +36,35 @@ namespace InvoiceBill
             string sInvoiceSql =
                 "SELECT INVTYPEID,INVTYPENAME FROM T_Invoice_Type ";
 
-            //cbbInvType.DataBindings = 
-            //cbbInvType.DataSource = GetDataTable(sInvoiceSql);
-            //cbbInvType.ValueMember = "INVTYPEID";
-            //cbbInvType.DisplayMember = "INVTYPENAME";
+            cbbInvType.EditValue = "INVTYPEID";
+            cbbInvType.Properties.DataSource = GetDataTable(sInvoiceSql);
+            cbbInvType.Properties.ValueMember = "INVTYPEID";
+            cbbInvType.Properties.DisplayMember = "INVTYPENAME";
 
+        }
+
+        public DataTable GetDataTable(string SqlOraStr)
+        {
+            CommonInterface pObj_Comm = CommonFactory.CreateInstance(CommonData.sql);
+            try
+            {
+                DataTable pDTMain = pObj_Comm.ExeForDtl(SqlOraStr);
+
+                pObj_Comm.Close();
+                return pDTMain;
+
+            }
+            catch (Exception ex)
+            {
+                pObj_Comm.Close();
+                throw ex;
+            }
         }
 
         private void txtDept_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            getOtherData(ComStruct.selCustomer);
-            txtCust.Text = sCustName;
-
+            getOtherData(ComStruct.selDept);
+            txtDept.Text = sDeptName;
         }
         public void getOtherData(int sOperType)
         {
@@ -55,19 +78,60 @@ namespace InvoiceBill
 
                 if (arrValue.Length > 0)
                 {
-                    sCustId = arrValue[0];
-                    sCustName = arrValue[1];
+                    if (sOperType == ComStruct.selCustomer)
+                    {
+                        sCustId = arrValue[0];
+                        sCustName = arrValue[1];
+                    }
+                    if (sOperType == ComStruct.selDept)
+                    {
+                        sDeptId = arrValue[0];
+                        sDeptName = arrValue[1];
+                    }
                 }
             }
         }
+
+        private void GetCust()
+        {
+            string sFilter = txtCust.Text.Trim();
+            string sFilterSql =
+
+
+            "SELECT     "+
+            "    CUSTID,CUSTNAME,TaxCustName,A.INVTYPEID,B.INVTYPENAME,TAXNO," +
+            "    BANKNAME + BANKACCOUNT AS BANKNAME, ADDRESS+CONTACTPHONE AS ADDRESS   " +
+            " FROM T_Cust_TaxCode A LEFT JOIN T_Invoice_Type B ON A.INVTYPEID = B.INVTYPEID   " +
+            " WHERE(CUSTCODE ='"+ sFilter + "' OR CUSTNAME LIKE '%" + sFilter + "%' OR DBO.FGETPY(CUSTNAME) LIKE '%" + sFilter + "%') ";
+
+            if (txtCust.Text.Trim() != "")
+            {
+                frmSelCust ofrmSelCust = new frmSelCust();
+                ofrmSelCust.ShowSelectData(sFilterSql);
+                ofrmSelCust.ShowDialog(this);
+
+                if (ofrmSelCust.DialogResult == DialogResult.OK)
+                {
+                    sCustId = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["CUSTID"].ToString();
+                    txtCust.Text = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["CUSTNAME"].ToString();
+                    txtInvCust.Text = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["TAXCUSTNAME"].ToString();
+                    txtTaxNo.Text = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["TAXNO"].ToString();
+                    txtBank.Text = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["BANKNAME"].ToString();
+                    txtAddress.Text = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["ADDRESS"].ToString();
+                    //cbbInvType.EditValue = ((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["INVTYPEID"].ToString();
+                    cbbInvType.ItemIndex = int.Parse(((DataRowView)(ofrmSelCust.gridView1.GetFocusedRow())).Row["INVTYPEID"].ToString()); 
+                }
+            }
+        }
+
 
         private void txtCust_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
-                getOtherData(ComStruct.selCustomer);
-                txtCust.Text = sCustName;
-
+                //getOtherData(ComStruct.selCustomer);
+                //txtCust.Text = sCustName;
+                GetCust();
                 GetData();
             }
         }
@@ -113,21 +177,33 @@ namespace InvoiceBill
         {
             //string sDeptid = txtDept.Text.Trim();
             //string sCustId = txtCust.Text.Trim();
-
-
             string spName = "p_Get_Pending_Inv_Cust";
             string sDateFrom = dtpFrom.DateTime.ToString("yyyy-MM-dd");
             string sDateTo = dtpTo.DateTime.ToString("yyyy-MM-dd");            
 
-            string[] sParameters = new string[3] {"@CustId", "@BeginDate", "@EndDate" };
+            string[] sParameters = new string[4] { "@DeptId", "@CustId", "@BeginDate", "@EndDate" };
 
-            string[] sParametersValue = new string[3] {sCustId, sDateFrom, sDateTo };
-            string[] sParametersType = new string[3] {"VarChar", "VarChar", "VarChar" };
-            string[] sParametersDirection = new string[3] {"Input", "Input", "Input" };
+            string[] sParametersValue = new string[4] {sDeptId,sCustId, sDateFrom, sDateTo };
+            string[] sParametersType = new string[4] {"Int","VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[4] { "Input", "Input", "Input", "Input" };
 
             gridControl1.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
         }
 
+        public void GetInfoByNo()
+        {
+            string spName = "p_Get_Pending_Inv_Cust";
+            string sDateFrom = dtpFrom.DateTime.ToString("yyyy-MM-dd");
+            string sDateTo = dtpTo.DateTime.ToString("yyyy-MM-dd");
+
+            string[] sParameters = new string[3] { "@CustId", "@BeginDate", "@EndDate" };
+
+            string[] sParametersValue = new string[3] { sCustId, sDateFrom, sDateTo };
+            string[] sParametersType = new string[3] { "VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[3] { "Input", "Input", "Input" };
+
+            gridControl1.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
+        }
         public void GetDetailData()
         {
             string sDeptid = txtDept.Text.Trim();
@@ -135,24 +211,28 @@ namespace InvoiceBill
             //string sInvTypeId = cbbInvType.SelectedItem.ToString();
             string iItemList = getItemList();
 
+            if (iItemList != "")
+            {
+                string spName = "p_Get_Pending_Inv_Detail_List";
 
-            string spName = "p_Get_Pending_Inv_Detail_List";
+                string[] sParameters = new string[1] { "@BseqIdList" };
 
-            string[] sParameters = new string[1] { "@BseqIdList" };
+                string[] sParametersValue = new string[1] { iItemList };
+                string[] sParametersType = new string[1] { "VarChar" };
+                string[] sParametersDirection = new string[1] { "Input" };
 
-            string[] sParametersValue = new string[1] { iItemList };
-            string[] sParametersType = new string[1] { "VarChar"};
-            string[] sParametersDirection = new string[1] { "Input" };
+                gridControl2.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
 
-            gridControl2.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
+            }
         }
         public string getItemList() //获取选中的行
         {
-            string iIdList = "";
+            string iIdList = "'',";
+
             foreach (int i in gridView1.GetSelectedRows())
             {
                 DataRow rows = gridView1.GetDataRow(i);
-                iIdList = iIdList + rows["BSEQID"].ToString() + ",";               
+                iIdList = iIdList +"'"+ rows["BSEQID"].ToString() + "',";               
             }
 
             iIdList = iIdList.Substring(0, iIdList.Length - 1);
@@ -160,65 +240,123 @@ namespace InvoiceBill
         }
         public int ValidData() //校验开票数据
         {
+            //是否超发票限额 
+            //是否缺少分类编码
+            //开票数量，金额不能超过未开金额
+            foreach (int i in gridView2.GetSelectedRows())
+            {
+                double fAmount = double.Parse(gridView2.GetRowCellValue(i, "BSNAMOUNT").ToString());
+                double iTotal = double.Parse(gridView2.GetRowCellValue(i, "BSNTOTAL").ToString());
+                double iPTotal = double.Parse(gridView2.GetRowCellValue(i, "PTOTAL").ToString());
+                double iPAmount = double.Parse(gridView2.GetRowCellValue(i, "PAMOUNT").ToString());
+                double iPrice = double.Parse(gridView2.GetRowCellValue(i, "PRICE").ToString());
+
+                if (iPAmount/iPTotal != iPrice) { sRetMsg = "开票数量金额不正确！";return 1; }
+                if (iPTotal > iTotal || iPAmount > fAmount) { sRetMsg = "开票数量或金额不能大于未开数量金额！"; return 1; }
+            }
 
             return 0;
         }
-        public string GetXml()
+        public float GetSumAmount()
         {
-            string sXml = "<d>";
+            float fSumAmount = 0;
             foreach (int i in gridView2.GetSelectedRows())
             {
-                sXml = sXml + "<r>";
+                DataRow row = gridView2.GetDataRow(i);
+                fSumAmount = fSumAmount + float.Parse(row["AMOUNT"].ToString());
+            }
+            return fSumAmount;
+        }
+        public void SetBseqSumAmount()
+        {
+            float fSumAmount = 0;
+            string sCurrentBseqId = "";
+            foreach (int i in gridView1.GetSelectedRows())
+            {
+                DataRow row = gridView1.GetDataRow(i);
+                sCurrentBseqId =(row["BSEQID"].ToString()).ToString();
+                fSumAmount = GetDetAmount(sCurrentBseqId);
+
+                gridView1.SetRowCellValue(i, "AMOUNT", fSumAmount);
+            }
+        }
+        public float GetDetAmount(string sBseqId)
+        {
+            float fSumAmount = 0;
+            for (int i = 0; i < gridView2.RowCount; i++)
+            //    foreach (int i in gridView2.GetSelectedRows())
+            {
+
+                DataRow row = gridView2.GetDataRow(i);
+
+                if ((row["BSEQID"].ToString()).ToString() == sBseqId && (gridView2.IsRowSelected(i)))
+                {
+                    fSumAmount = fSumAmount + float.Parse(row["PAMOUNT"].ToString());
+                }
+
+            }
+
+            return fSumAmount;
+        }
+        public string GetXml()
+        {
+            string sXml = "<r>";
+            foreach (int i in gridView2.GetSelectedRows())
+            {
+                sXml = sXml + "<d>";
                 DataRow row = gridView2.GetDataRow(i);
                 sXml = sXml + "<BSEQID>" + row ["BSEQID"].ToString()+ "</BSEQID>";
                 sXml = sXml + "<CUSTID>" + sCustId + "</CUSTID>";
-                sXml = sXml + "<BILLTYPEID>"+ row["BILLTYPEID"].ToString() + "</BILLTYPEID>";
-                sXml = sXml + "<iLINENO>" + row["iLINENO"].ToString() + "</iLINENO>";
+                sXml = sXml + "<BILLTYPEID>"+ row["INVTYPEID"].ToString() + "</BILLTYPEID>";
+                sXml = sXml + "<xLineNo>" + row["xLineNo"].ToString() + "</xLineNo>";
                 sXml = sXml + "<ARTID>" + row["ARTID"].ToString() + "</ARTID>";
                 sXml = sXml + "<TOTAL>" + row["TOTAL"].ToString() + "</TOTAL>";
                 sXml = sXml + "<PRICE>" + row["PRICE"].ToString() + "</PRICE>";
                 sXml = sXml + "<AMOUNT>" + row["AMOUNT"].ToString() + "</AMOUNT>";
-                sXml = sXml + "</r>";
+                sXml = sXml + "<TAXRATE>" + row["TAXRATE"].ToString() + "</TAXRATE>";
+                sXml = sXml + "</d>";
             }
-            return sXml = sXml + "</d>";
+            return sXml = sXml + "</r>";
         }
 
         //保存发票
-        public int InvoiceSave(string sBseqId, string sInvoiceCode, string sInvoiceNo)
+        public int InvoiceBill()
         {
             int iResult = 0;
-            string spName = "p_fin_invoice_bill";
+            string sXml = GetXml();
+            string sInvTypeId = cbbInvType.EditValue.ToString();          
+            string spName = "p_fin_invoice_bill_Cust";
+            sCurrentInvSeqId = "";
 
-            string[] sParameters = new string[5] { "@BseqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
+            string[] sParameters = new string[6] { "result", "@Xml", "@InvoiceType", "@UserId", "@InvSeqId", "@Msg" };
 
-            string[] sParametersValue = new string[5] { sBseqId, sInvoiceCode, sInvoiceNo, "0", sRetMsg };
-            string[] sParametersType = new string[5] { "Varchar2", "Varchar2", "Varchar2", "Varchar2", "Varchar2" };
-            string[] sParametersDirection = new string[5] { "Input", "Input", "Input", "Input", "Output" };
+            string[] sParametersValue = new string[6] {"0", sXml, sInvTypeId, "0", "", sRetMsg };
+            string[] sParametersType = new string[6] { "Int","VarChar", "Int", "VarChar", "Int", "VarChar" };
+            string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input", "Output", "Output" };
+            int[] sParametersSize = new int[6] {10, sXml.Length, 20, 20, 20, 512 };
 
-            iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection));
+            //iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection));
+            iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection, sParametersSize, out sCurrentInvSeqId, out sRetMsg));
             return iResult;
         }
-
-        //读取开票结果明细
-        public void GetInvoiceData(int iInvseqId)
+        public string OperData(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, int[] ParametersSize, out string Id, out string ErrMsg)
         {
-            string sDeptid = txtDept.Text.Trim();
-            string sCustId = txtCust.Text.Trim();
-            string sInvTypeId = cbbInvType.SelectedItem.ToString();
-            string iItemList = getItemList();
+            string iResult;
 
+            CommonInterface pObj_Comm = CommonFactory.CreateInstance(CommonData.sql);
+            try
+            {
+                iResult = pObj_Comm.ExecuteSP(StoredProcedureName, Parameters, ParametersValue, ParametersType, ParametersDirection, ParametersSize,out Id, out ErrMsg);
 
-            string spName = "p_Get_Pending_Inv_Detail_List";
-            string sDateFrom = dtpFrom.DateTime.ToString("yyyy-MM-dd");
-            string sDateTo = dtpTo.DateTime.ToString("yyyy-MM-dd");
+                pObj_Comm.Close();
 
-            string[] sParameters = new string[5] { "@BseqId", "@InvTypeId", "@LineList", "@BeginDate", "@EndDate" };
-
-            string[] sParametersValue = new string[5] { "", sInvTypeId.ToString(), sCustId, sDateFrom, sDateTo };
-            string[] sParametersType = new string[5] { "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
-            string[] sParametersDirection = new string[5] { "Input", "Input", "Input", "Input", "Input" };
-
-            gridControl2.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
+                return iResult;
+            }
+            catch (Exception ex)
+            {
+                pObj_Comm.Close();
+                throw ex;
+            }
         }
 
         //获取发票头信息
@@ -228,11 +366,11 @@ namespace InvoiceBill
             frmMain.oComTaxCard._InvocieHeader.sInfoClientTaxCode = txtTaxNo.Text.Trim();
             frmMain.oComTaxCard._InvocieHeader.sInfoClientBankAccount = txtBank.Text.Trim();
             frmMain.oComTaxCard._InvocieHeader.sInfoClientAddressPhone = txtAddress.Text.Trim();
-            frmMain.oComTaxCard._InvocieHeader.sInfoSellerBankAccount = "江南农村商业银行大学城支行 88801019012010000001281";
-            frmMain.oComTaxCard._InvocieHeader.sInfoSellerAddressPhone = "江苏省常州市武进经济开发区长扬路15号 0519-69698289";
+            frmMain.oComTaxCard._InvocieHeader.sInfoSellerBankAccount = ComStruct.sInfoSellerBankAccount;
+            frmMain.oComTaxCard._InvocieHeader.sInfoSellerAddressPhone = ComStruct.sInfoSellerAddressPhone;            
             //frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = iTaxRate;
             frmMain.oComTaxCard._InvocieHeader.sInfoNotes = txtNote.Text.Trim();
-            frmMain.oComTaxCard._InvocieHeader.sInfoInvoicer = ""; //开票员
+            frmMain.oComTaxCard._InvocieHeader.sInfoInvoicer = frmMain.sTrueName; //开票员
             frmMain.oComTaxCard._InvocieHeader.sInfoChecker = ""; //复核员
             frmMain.oComTaxCard._InvocieHeader.sInfoCashier =""; //
             //frmMain.oComTaxCard._InvocieHeader.sInfoBillNumber = Convert.ToString(row["BSEQID"]);
@@ -244,12 +382,12 @@ namespace InvoiceBill
         {
             DataTable myDt = new DataTable();
 
-            string spName = "sp_get_invDetail";
+            string spName = "p_Get_Pending_Inv_Detail_Cust";
 
             string[] sParameters = new string[1] { "@InvseqId"};
 
-            string[] sParametersValue = new string[1] { iInvseqId.ToString() };
-            string[] sParametersType = new string[1] { "Varchar2"};
+            string[] sParametersValue = new string[1] { sCurrentInvSeqId.ToString() };
+            string[] sParametersType = new string[1] { "VarChar" };
             string[] sParametersDirection = new string[1] { "Input" };
 
             myDt = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
@@ -273,44 +411,273 @@ namespace InvoiceBill
 
         }
         //调用税控开票
-        public int InvoiceBill()
+        private int Invoice()
         {
-            return frmMain.oComTaxCard.InvoiceBill();
+
+            if (InvoiceBill() == -1) { MessageBox.Show(sRetMsg); return 1; }
+
+            if (InvoiceBillHeader() == -1) { MessageBox.Show(sRetMsg); return 1; }
+            if (InvoiceBillDetail() == 1) { MessageBox.Show(sRetMsg); return 1; }
+            //接口开具发票，不成功作废后台明细
+            if (chkNoBill.Checked == false)
+            {
+                if (frmMain.oComTaxCard.InvoiceBill() == 1)
+                {
+
+                    MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
+                    if (PublicUtility.InvoiceCanceled(sCurrentInvSeqId) == -1) MessageBox.Show(sRetMsg);
+                    return 1;
+                }
+                else
+                {
+                    if (chkPrint.Checked)
+                        frmMain.oComTaxCard.InvPrint(int.Parse(frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()),
+                            frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, 0, frmMain.oComTaxCard.iInfoShowPrtDlg);
+                    if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+
+                    //frmMain.refreshInfo();
+                }
+            }
+           return 0;
         }
         //审核发票
         public int InvoiceValidated(string sBseqId, string sInvoiceCode, string sInvoiceNo)
         {
+            if (sInvoiceCode is null) sInvoiceCode = "";
             int iResult = 0;
+            string sOut = "";
+
             string spName = "p_fin_invoice_Validated";
 
-            string[] sParameters = new string[5] { "@InvseqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
+            string[] sParameters = new string[6] { "result","@InvseqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[5] { iInvseqId.ToString(), sInvoiceCode, sInvoiceNo, "0", sRetMsg };
-            string[] sParametersType = new string[5] { "Varchar2", "Varchar2", "Varchar2", "Varchar2", "Varchar2" };
-            string[] sParametersDirection = new string[5] { "Input", "Input", "Input", "Input", "Output" };
-
-            iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection));
+            string[] sParametersValue = new string[6] { "0", sCurrentInvSeqId.ToString(), sInvoiceCode, sInvoiceNo, "0", sRetMsg };
+            string[] sParametersType = new string[6] { "Int", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input", "Input", "Output" };
+            int[] sParametersSize = new int[6] { 10, 20, 20, 20, 20, 512 };
+            
+            iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection, sParametersSize, out sOut, out sRetMsg));
+            
             return iResult;
         }
         //作废发票
         public int InvoiceCanceled(string sInvseqId)
         {
             int iResult = 0;
-            string spName = "p_fin_invoice_Canceled";
+            string sOut = "";
+            string spName = "P_Invoice_Cancel";
 
-            string[] sParameters = new string[3] { "@InvseqId","@UserId", "@Msg" };
+            string[] sParameters = new string[4] { "result", "@InvseqId","@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[3] { iInvseqId.ToString(),"0", sRetMsg };
-            string[] sParametersType = new string[3] { "Varchar2", "Varchar2", "Varchar2" };
-            string[] sParametersDirection = new string[3] { "Input", "Input","Output" };
+            string[] sParametersValue = new string[4] { "0", sCurrentInvSeqId.ToString(),"0", sRetMsg };
+            string[] sParametersType = new string[4] {"Int", "VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[4] { "ReturnValue", "Input", "Input","Output" };
+            int[] sParametersSize = new int[4] { 10, 20, 20,512 };
 
-            iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection));
+            iResult = int.Parse(OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection, sParametersSize, out sOut, out sRetMsg));
             return iResult;
         }
 
         private void gridView1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
             GetDetailData();
+
+            foreach (int i in gridView1.GetSelectedRows())
+            {
+                DataRow row = gridView1.GetDataRow(i);
+                setDetailValue(row["BSEQID"].ToString());
+            }
+
+        }
+
+        private void gridView2_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            SetBseqSumAmount();
+            //int i = gridView2.FocusedRowHandle;
+            int i = e.ControllerRow;
+            if (gridView2.IsRowSelected(i))
+            {
+                gridView2.SetRowCellValue(i, "PTOTAL", gridView2.GetRowCellValue(i, "BSNTOTAL"));
+                gridView2.SetRowCellValue(i, "PAMOUNT", gridView2.GetRowCellValue(i, "BSNAMOUNT"));
+            }
+            else
+            {
+                gridView2.SetRowCellValue(i, "PTOTAL", 0);
+                gridView2.SetRowCellValue(i, "PAMOUNT", 0);
+            }           
+        }
+        private void setDetailValue(string sBseqId)
+        {
+            for (int i = 0; i < gridView2.RowCount; i++)
+            {
+                DataRow row = gridView2.GetDataRow(i);
+                if ((row["BSEQID"].ToString()).ToString() == sBseqId)
+                {
+                    gridView2.SelectRow(i);
+                    gridView2.SetRowCellValue(i, "PTOTAL", gridView2.GetRowCellValue(i, "BSNTOTAL"));
+                    gridView2.SetRowCellValue(i, "PAMOUNT", gridView2.GetRowCellValue(i, "BSNAMOUNT"));
+                }
+            }
+        }
+        private void gridView2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13) 
+            {
+                gridView2.UpdateCurrentRow();
+            }
+        }
+
+        private void gridView2_KeyUp(object sender, KeyEventArgs e)
+        {
+            /*gridView2.UpdateCurrentRow();
+
+            if (e.KeyCode == Keys.Enter && (gridView2.FocusedColumn.FieldName == "PTOTAL"))
+            {
+                int iCurrentItemId = gridView1.FocusedRowHandle;
+                DataRow row = gridView2.GetFocusedDataRow();
+                double fAmount = double.Parse(row["BSNAMOUNT"].ToString());
+                //double fAmount = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "BSNAMOUNT").ToString());
+                double iTotal = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "BSNTOTAL").ToString());
+                double iPTotal = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "PTOTAL").ToString());
+                double fPAmount = fAmount * (iPTotal / iTotal);
+
+                gridView2.SetRowCellValue(iCurrentItemId, "PAMOUNT", fPAmount.ToString());
+            }
+            SetBseqSumAmount();
+            gridView1.UpdateCurrentRow();*/
+        }
+
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            /*
+            if (gridView2.RowCount > 0 && e.RowHandle >= 0)
+            {
+                if (gridView2.FocusedColumn.FieldName == "PTOTAL")
+                {
+                    try
+                    {
+                        int iCurrentItemId = gridView2.FocusedRowHandle;
+                        double fAmount = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "BSNAMOUNT").ToString());
+                        double iTotal = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "BSNTOTAL").ToString());
+                        double iPTotal = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "PTOTAL").ToString());
+
+                        double fPAmount = fAmount * (iPTotal/iTotal);
+
+                        gridView2.SetRowCellValue(iCurrentItemId, "PAMOUNT", fPAmount);
+                        SetBseqSumAmount();
+                    }
+                    catch
+                    { }
+                 }
+
+            }*/
+        }
+
+        private void gridView2_LostFocus(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridView2_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            if (gridView2.RowCount > 0 && e.RowHandle >= 0)
+            {
+                if (gridView2.FocusedColumn.FieldName == "PTOTAL")
+                {
+                    try
+                    {
+                        int iCurrentItemId = e.RowHandle;
+                        double fAmount = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "BSNAMOUNT").ToString());
+                        double iTotal = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "BSNTOTAL").ToString());
+                        double iPTotal = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "PTOTAL").ToString());
+                        double iPAmount = double.Parse(gridView2.GetRowCellValue(iCurrentItemId, "PAMOUNT").ToString());
+
+                        if (iPAmount > fAmount || iPTotal > iTotal)
+                        {
+                            gridView2.SetRowCellValue(iCurrentItemId, "PTOTAL", iTotal);
+                            gridView2.SetRowCellValue(iCurrentItemId, "PAMOUNT", fAmount);
+                        }
+                        double fPAmount = fAmount * (iPTotal / iTotal);
+
+                        gridView2.SetRowCellValue(iCurrentItemId, "PAMOUNT", fPAmount);
+                        SetBseqSumAmount();
+                    }
+                    catch
+                    { }
+                }
+
+            }            
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (Invoice() == 0) { MessageBox.Show(sRetMsg); }
+            else
+            { InoviceIminit(); }
+        }
+        private void InoviceIminit()
+        {
+            gridControl1.DataSource = null;
+            gridControl2.DataSource = null;
+            OperateControls(panelControl1);
+        }
+
+        public void OperateControls(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is TextEdit) { c.Text = ""; }
+
+                if (c is DateEdit) { ((DateEdit)c).DateTime = DateTime.Now; }
+
+            }
+
+            sCustId ="";
+            sCustName ="";
+            iInvseqId = 0;
+            sRetMsg = "";
+            sCurrentInvSeqId = "";
+
+    }
+        private void frmInvoiceByCust_Load(object sender, EventArgs e)
+        {
+
+            fLoadInvoiceType();
+            //cbbInvType.SelectedText;
+            dtpFrom.DateTime = DateTime.Now.Date.AddDays(1 - DateTime.Now.Day);
+            dtpTo.DateTime = DateTime.Now.Date;
+            gridControl1.ForceInitialize();
+            // Restore the previously saved layout  
+            if (System.IO.File.Exists(fileName))
+                gridControl1.MainView.RestoreLayoutFromXml(fileName);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                //getOtherData(ComStruct.selCustomer);
+                //txtCust.Text = sCustName;
+
+                GetCust();
+                GetData();
+            }
+        }
+
+        private void frmInvoiceByCust_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            gridControl1.MainView.SaveLayoutToXml(fileName);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            GetData();
+            gridControl2.DataSource = null;
         }
     }
 }

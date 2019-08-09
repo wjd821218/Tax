@@ -464,7 +464,7 @@ namespace InvoiceBill.DAO
 			}
 		}
 
-		#endregion
+        #endregion
 
         ///<summary>
         /// 执行存储过程,得到结果集DataSet
@@ -472,6 +472,12 @@ namespace InvoiceBill.DAO
         /// <param name="sqname">存储过程名称</param>
         /// <param name="array">参数名称与值的数组</param>
         /// <returns>返回True或False</returns>
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string[] ParametersOut)
+        {
+            string[] sParametersOut= new string[18] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", };
+            ParametersOut = sParametersOut;
+            return "";
+        }
         public DataSet ExcuteSp(string sqname, string[,] array)
         {
             try
@@ -509,7 +515,24 @@ namespace InvoiceBill.DAO
         {
             return "";
         }
-        public DataSet ExecuteSPSursor(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection)
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, int[] ParametersSize)
+        {
+            return "";
+        }
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string Id, out string Errmsg)
+        {
+            Id = "";
+            Errmsg = "";
+            return "";
+        }
+
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, int[] ParametersSize, out string Id, out string Errmsg)
+        {
+            Id = "";
+            Errmsg = "";
+            return "";
+        }
+            public DataSet ExecuteSPSursor(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection)
         {
             DataSet oDataSet = new DataSet();
             return oDataSet;           

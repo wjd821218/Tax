@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gColBseqId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.components = new System.ComponentModel.Container();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCashier = new System.Windows.Forms.TextBox();
@@ -38,11 +38,10 @@
             this.btnBill = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbbInvType = new System.Windows.Forms.ComboBox();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColTaxNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColAdress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColContactPhone = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,30 +52,38 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColDept = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColCustId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDrName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColCustCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColCustName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColTaxRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColBankName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColBankAccount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColNotes = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtDept = new System.Windows.Forms.TextBox();
             this.txtCust = new System.Windows.Forms.TextBox();
-            this.btnQuery = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbbDept = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbbBillMode = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.upTimerLong = new System.Windows.Forms.NumericUpDown();
+            this.chkAutoBill = new System.Windows.Forms.CheckBox();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upTimerLong)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gColBseqId
-            // 
-            this.gColBseqId.Caption = "票据流水";
-            this.gColBseqId.Name = "gColBseqId";
-            this.gColBseqId.Visible = true;
-            this.gColBseqId.VisibleIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(916, 60);
+            this.label7.Location = new System.Drawing.Point(726, 16);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 18;
@@ -85,7 +92,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(790, 63);
+            this.label6.Location = new System.Drawing.Point(600, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 17;
@@ -93,14 +100,14 @@
             // 
             // txtCashier
             // 
-            this.txtCashier.Location = new System.Drawing.Point(967, 55);
+            this.txtCashier.Location = new System.Drawing.Point(777, 11);
             this.txtCashier.Name = "txtCashier";
             this.txtCashier.Size = new System.Drawing.Size(67, 21);
             this.txtCashier.TabIndex = 16;
             // 
             // txtChecker
             // 
-            this.txtChecker.Location = new System.Drawing.Point(840, 57);
+            this.txtChecker.Location = new System.Drawing.Point(650, 13);
             this.txtChecker.Name = "txtChecker";
             this.txtChecker.Size = new System.Drawing.Size(67, 21);
             this.txtChecker.TabIndex = 15;
@@ -108,7 +115,7 @@
             // chkShowPrint
             // 
             this.chkShowPrint.AutoSize = true;
-            this.chkShowPrint.Location = new System.Drawing.Point(664, 58);
+            this.chkShowPrint.Location = new System.Drawing.Point(728, 45);
             this.chkShowPrint.Name = "chkShowPrint";
             this.chkShowPrint.Size = new System.Drawing.Size(120, 16);
             this.chkShowPrint.TabIndex = 14;
@@ -118,7 +125,7 @@
             // chkPrint
             // 
             this.chkPrint.AutoSize = true;
-            this.chkPrint.Location = new System.Drawing.Point(582, 59);
+            this.chkPrint.Location = new System.Drawing.Point(605, 45);
             this.chkPrint.Name = "chkPrint";
             this.chkPrint.Size = new System.Drawing.Size(72, 16);
             this.chkPrint.TabIndex = 13;
@@ -128,17 +135,18 @@
             // btnBill
             // 
             this.btnBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBill.Location = new System.Drawing.Point(1109, 59);
+            this.btnBill.Location = new System.Drawing.Point(865, 62);
             this.btnBill.Name = "btnBill";
             this.btnBill.Size = new System.Drawing.Size(75, 23);
             this.btnBill.TabIndex = 12;
             this.btnBill.Text = "开具发票";
             this.btnBill.UseVisualStyleBackColor = true;
+            this.btnBill.Click += new System.EventHandler(this.btnBill_Click_1);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(365, 62);
+            this.label5.Location = new System.Drawing.Point(247, 64);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 11;
@@ -147,50 +155,50 @@
             // cbbInvType
             // 
             this.cbbInvType.FormattingEnabled = true;
-            this.cbbInvType.Location = new System.Drawing.Point(433, 57);
+            this.cbbInvType.Location = new System.Drawing.Point(309, 59);
             this.cbbInvType.Name = "cbbInvType";
-            this.cbbInvType.Size = new System.Drawing.Size(121, 20);
+            this.cbbInvType.Size = new System.Drawing.Size(81, 20);
             this.cbbInvType.TabIndex = 10;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "捡配时间";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
             // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "开票抬头";
+            this.gridColumn6.FieldName = "TAXCUSTNAME";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.VisibleIndex = 10;
+            this.gridColumn6.Width = 146;
             // 
-            // gridColumn7
+            // gColTaxNo
             // 
-            this.gridColumn7.Caption = "税号";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
+            this.gColTaxNo.Caption = "税号";
+            this.gColTaxNo.FieldName = "TAXNO";
+            this.gColTaxNo.Name = "gColTaxNo";
+            this.gColTaxNo.Visible = true;
+            this.gColTaxNo.VisibleIndex = 11;
+            this.gColTaxNo.Width = 106;
             // 
-            // gridColumn8
+            // gColAdress
             // 
-            this.gridColumn8.Caption = "地址";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 8;
+            this.gColAdress.Caption = "地址";
+            this.gColAdress.FieldName = "ADDRESS";
+            this.gColAdress.Name = "gColAdress";
+            this.gColAdress.Visible = true;
+            this.gColAdress.VisibleIndex = 14;
+            this.gColAdress.Width = 115;
             // 
-            // gridColumn9
+            // gColContactPhone
             // 
-            this.gridColumn9.Caption = "电话";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 10;
+            this.gColContactPhone.Caption = "电话";
+            this.gColContactPhone.FieldName = "CONTACTPHONE";
+            this.gColContactPhone.Name = "gColContactPhone";
+            this.gColContactPhone.Visible = true;
+            this.gColContactPhone.VisibleIndex = 15;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(580, 26);
+            this.label4.Location = new System.Drawing.Point(394, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 9;
@@ -198,15 +206,15 @@
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(648, 20);
+            this.dtpEndDate.Location = new System.Drawing.Point(462, 20);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(128, 21);
+            this.dtpEndDate.Size = new System.Drawing.Size(82, 21);
             this.dtpEndDate.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(368, 27);
+            this.label3.Location = new System.Drawing.Point(243, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 7;
@@ -215,7 +223,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 25);
+            this.label2.Location = new System.Drawing.Point(11, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 6;
@@ -224,15 +232,18 @@
             // gColAmount
             // 
             this.gColAmount.Caption = "金额";
+            this.gColAmount.FieldName = "BSNAMOUNT";
             this.gColAmount.Name = "gColAmount";
+            this.gColAmount.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "BSNAMOUNT", "SUM={0:0.##}")});
             this.gColAmount.Visible = true;
-            this.gColAmount.VisibleIndex = 4;
+            this.gColAmount.VisibleIndex = 9;
             // 
             // dtpBeginDate
             // 
-            this.dtpBeginDate.Location = new System.Drawing.Point(433, 21);
+            this.dtpBeginDate.Location = new System.Drawing.Point(308, 19);
             this.dtpBeginDate.Name = "dtpBeginDate";
-            this.dtpBeginDate.Size = new System.Drawing.Size(128, 21);
+            this.dtpBeginDate.Size = new System.Drawing.Size(82, 21);
             this.dtpBeginDate.TabIndex = 4;
             // 
             // panel2
@@ -241,7 +252,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 100);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1216, 350);
+            this.panel2.Size = new System.Drawing.Size(944, 350);
             this.panel2.TabIndex = 4;
             // 
             // gridControl1
@@ -250,7 +261,7 @@
             this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1216, 350);
+            this.gridControl1.Size = new System.Drawing.Size(944, 350);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -259,35 +270,112 @@
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColDept,
+            this.gColCustId,
+            this.gridColumn1,
+            this.gColDrName,
+            this.gridColumn2,
+            this.gColCustCode,
             this.gColCustName,
-            this.gColBseqId,
+            this.gColTaxRate,
             this.gColAmount,
-            this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn9,
+            this.gColTaxNo,
+            this.gColBankName,
+            this.gColBankAccount,
+            this.gColAdress,
+            this.gColContactPhone,
             this.gColNotes});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.MultiSelect = true;
             this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
+            this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gColDept
             // 
             this.gColDept.Caption = "部门";
+            this.gColDept.FieldName = "DEPTNAME";
             this.gColDept.Name = "gColDept";
+            this.gColDept.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "DEPTNAME", "{0}")});
             this.gColDept.Visible = true;
             this.gColDept.VisibleIndex = 1;
+            // 
+            // gColCustId
+            // 
+            this.gColCustId.Caption = "客户代码";
+            this.gColCustId.FieldName = "CUSTID";
+            this.gColCustId.Name = "gColCustId";
+            this.gColCustId.Visible = true;
+            this.gColCustId.VisibleIndex = 2;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "装车单号";
+            this.gridColumn1.FieldName = "DSEQID";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 3;
+            // 
+            // gColDrName
+            // 
+            this.gColDrName.Caption = "配送路线";
+            this.gColDrName.FieldName = "DRNAME";
+            this.gColDrName.Name = "gColDrName";
+            this.gColDrName.Visible = true;
+            this.gColDrName.VisibleIndex = 4;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "装车顺序";
+            this.gridColumn2.FieldName = "SN";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 5;
+            // 
+            // gColCustCode
+            // 
+            this.gColCustCode.Caption = "客户编码";
+            this.gColCustCode.FieldName = "CUSTCODE";
+            this.gColCustCode.Name = "gColCustCode";
+            this.gColCustCode.Visible = true;
+            this.gColCustCode.VisibleIndex = 6;
             // 
             // gColCustName
             // 
             this.gColCustName.Caption = "往来单位";
+            this.gColCustName.FieldName = "CUSTNAME";
             this.gColCustName.Name = "gColCustName";
             this.gColCustName.Visible = true;
-            this.gColCustName.VisibleIndex = 2;
+            this.gColCustName.VisibleIndex = 7;
+            this.gColCustName.Width = 239;
+            // 
+            // gColTaxRate
+            // 
+            this.gColTaxRate.Caption = "税率";
+            this.gColTaxRate.FieldName = "TAXRATE";
+            this.gColTaxRate.Name = "gColTaxRate";
+            this.gColTaxRate.Visible = true;
+            this.gColTaxRate.VisibleIndex = 8;
+            // 
+            // gColBankName
+            // 
+            this.gColBankName.Caption = "开户行";
+            this.gColBankName.FieldName = "BANKNAME";
+            this.gColBankName.Name = "gColBankName";
+            this.gColBankName.Visible = true;
+            this.gColBankName.VisibleIndex = 12;
+            this.gColBankName.Width = 138;
+            // 
+            // gColBankAccount
+            // 
+            this.gColBankAccount.Caption = "帐号";
+            this.gColBankAccount.FieldName = "BANKACCOUNT";
+            this.gColBankAccount.Name = "gColBankAccount";
+            this.gColBankAccount.Visible = true;
+            this.gColBankAccount.VisibleIndex = 13;
             // 
             // gColNotes
             // 
@@ -295,43 +383,34 @@
             this.gColNotes.FieldName = "NOTES";
             this.gColNotes.Name = "gColNotes";
             this.gColNotes.Visible = true;
-            this.gColNotes.VisibleIndex = 9;
+            this.gColNotes.VisibleIndex = 16;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 62);
+            this.label1.Location = new System.Drawing.Point(9, 62);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "部门：";
             // 
-            // txtDept
-            // 
-            this.txtDept.Location = new System.Drawing.Point(80, 56);
-            this.txtDept.Name = "txtDept";
-            this.txtDept.Size = new System.Drawing.Size(282, 21);
-            this.txtDept.TabIndex = 2;
-            // 
             // txtCust
             // 
-            this.txtCust.Location = new System.Drawing.Point(80, 20);
+            this.txtCust.Location = new System.Drawing.Point(48, 20);
             this.txtCust.Name = "txtCust";
-            this.txtCust.Size = new System.Drawing.Size(282, 21);
+            this.txtCust.Size = new System.Drawing.Size(185, 21);
             this.txtCust.TabIndex = 1;
-            // 
-            // btnQuery
-            // 
-            this.btnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQuery.Location = new System.Drawing.Point(1107, 20);
-            this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnQuery.TabIndex = 0;
-            this.btnQuery.Text = "查询";
-            this.btnQuery.UseVisualStyleBackColor = true;
+            this.txtCust.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCust_KeyPress);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbbDept);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.cbbBillMode);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.upTimerLong);
+            this.panel1.Controls.Add(this.chkAutoBill);
+            this.panel1.Controls.Add(this.btnFilter);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtCashier);
@@ -347,36 +426,103 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.dtpBeginDate);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txtDept);
             this.panel1.Controls.Add(this.txtCust);
-            this.panel1.Controls.Add(this.btnQuery);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1216, 100);
+            this.panel1.Size = new System.Drawing.Size(944, 100);
             this.panel1.TabIndex = 3;
+            // 
+            // cbbDept
+            // 
+            this.cbbDept.FormattingEnabled = true;
+            this.cbbDept.Location = new System.Drawing.Point(48, 54);
+            this.cbbDept.Name = "cbbDept";
+            this.cbbDept.Size = new System.Drawing.Size(185, 20);
+            this.cbbDept.TabIndex = 25;
+            this.cbbDept.SelectedIndexChanged += new System.EventHandler(this.cbbDept_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(396, 63);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(65, 12);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "开票模式：";
+            // 
+            // cbbBillMode
+            // 
+            this.cbbBillMode.FormattingEnabled = true;
+            this.cbbBillMode.Location = new System.Drawing.Point(464, 58);
+            this.cbbBillMode.Name = "cbbBillMode";
+            this.cbbBillMode.Size = new System.Drawing.Size(81, 20);
+            this.cbbBillMode.TabIndex = 23;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(691, 70);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 12);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "开票间隔(秒)：";
+            // 
+            // upTimerLong
+            // 
+            this.upTimerLong.Location = new System.Drawing.Point(788, 66);
+            this.upTimerLong.Name = "upTimerLong";
+            this.upTimerLong.Size = new System.Drawing.Size(56, 21);
+            this.upTimerLong.TabIndex = 21;
+            // 
+            // chkAutoBill
+            // 
+            this.chkAutoBill.AutoSize = true;
+            this.chkAutoBill.Location = new System.Drawing.Point(605, 71);
+            this.chkAutoBill.Name = "chkAutoBill";
+            this.chkAutoBill.Size = new System.Drawing.Size(72, 16);
+            this.chkAutoBill.TabIndex = 20;
+            this.chkAutoBill.Text = "自动开票";
+            this.chkAutoBill.UseVisualStyleBackColor = true;
+            this.chkAutoBill.CheckedChanged += new System.EventHandler(this.chkAutoBill_CheckedChanged);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.Location = new System.Drawing.Point(865, 11);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 19;
+            this.btnFilter.Text = "查询";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmBillSum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 450);
+            this.ClientSize = new System.Drawing.Size(944, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmBillSum";
             this.Text = "增值税发票开票（合并开票）";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmBillSum_FormClosing);
+            this.Load += new System.EventHandler(this.frmBillSum_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upTimerLong)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DevExpress.XtraGrid.Columns.GridColumn gColBseqId;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtCashier;
@@ -386,11 +532,10 @@
         private System.Windows.Forms.Button btnBill;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbbInvType;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gColTaxNo;
+        private DevExpress.XtraGrid.Columns.GridColumn gColAdress;
+        private DevExpress.XtraGrid.Columns.GridColumn gColContactPhone;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.Label label3;
@@ -404,9 +549,23 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColCustName;
         private DevExpress.XtraGrid.Columns.GridColumn gColNotes;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDept;
         private System.Windows.Forms.TextBox txtCust;
-        private System.Windows.Forms.Button btnQuery;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown upTimerLong;
+        private System.Windows.Forms.CheckBox chkAutoBill;
+        private System.Windows.Forms.Button btnFilter;
+        private DevExpress.XtraGrid.Columns.GridColumn gColBankName;
+        private DevExpress.XtraGrid.Columns.GridColumn gColBankAccount;
+        private DevExpress.XtraGrid.Columns.GridColumn gColCustCode;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbbBillMode;
+        private DevExpress.XtraGrid.Columns.GridColumn gColTaxRate;
+        private System.Windows.Forms.Timer timer1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gColCustId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDrName;
+        private System.Windows.Forms.ComboBox cbbDept;
     }
 }

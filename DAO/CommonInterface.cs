@@ -306,14 +306,17 @@ namespace InvoiceBill.DAO
 		/// <param name="ParametersType">同参数列表对应的参数类型列表</param>
 		void ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType);
 
-		/// <summary>
-		/// 执行存储过程返回bool
-		/// </summary>
-		/// <param name="StoredProcedureName">存储过程名</param>
-		/// <param name="ParametersNames">数组参数名</param>
-		/// <param name="ParametersValue">数组参数值</param>
-		/// <returns>bool</returns>
-		bool ExecuteSP(string StoredProcedureName, string[] ParametersNames, object[] ParametersValue);
+        /// <summary>
+        /// 执行存储过程返回bool
+        /// </summary>
+        /// <param name="StoredProcedureName">存储过程名</param>
+        /// <param name="ParametersNames">数组参数名</param>
+        /// <param name="ParametersValue">数组参数值</param>
+        /// <returns>bool</returns>
+        /// 
+        string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string[] ParametersOut);
+
+        bool ExecuteSP(string StoredProcedureName, string[] ParametersNames, object[] ParametersValue);
 
 		/// <summary>
 		/// 执行存储过程返回DataTable
@@ -333,7 +336,10 @@ namespace InvoiceBill.DAO
         DataSet ExecuteSPSursor(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection);
         DataSet ExcuteSp(string sqname, string[,] array);
         string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection);
-
+        string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, int[] ParametersSize);
+        string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string Id, out string Errmsg);
+        string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, int[] ParametersSize, out string Id, out string Errmsg);
+        //string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string[] ParametersOut);
 
         /// <summary>
         /// 执行sql语句返回第一行第一列的值

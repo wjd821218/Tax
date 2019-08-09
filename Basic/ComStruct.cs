@@ -13,6 +13,10 @@ namespace InvoiceBill.Basic
         public const int selBuyer = 3;    //采购员
         public const int selSeller = 4;    //业务员
         public const int selCustomer = 5;    //业务员
+        public const int selDept = 6;    //部门
+
+        public static string sInfoSellerBankAccount = "中国商业银行沭阳支行营业部 1116060009000212818";
+        public static string sInfoSellerAddressPhone = "江苏省沭阳县昆山路2号科技创业园 0527-83584788";
 
 
         public struct Dept
@@ -22,6 +26,12 @@ namespace InvoiceBill.Basic
             public int Terminated;
             public int Canceled;
             public string Note;
+        }
+
+        public struct ToJsonMy
+        {
+            public string result { get; set; }  //属性的名字，必须与json格式字符串中的"key"值一样。
+            public string data { get; set; }
         }
     }
 }

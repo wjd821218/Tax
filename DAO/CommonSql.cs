@@ -694,6 +694,10 @@ namespace InvoiceBill.DAO
         }
         public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection)
         {
+            return "";
+        }
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection,int[] ParametersSize)
+        {
             int iReturnValue = 0;
             try
             {
@@ -705,9 +709,11 @@ namespace InvoiceBill.DAO
                     SqlParameter myParm = new SqlParameter();
                     myParm.ParameterName = Parameters[i];
                     myParm.SqlDbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), ParametersType[i].ToString());
-                    myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString()); ;
+                    myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString()); 
                     if (ParametersDirection[i].ToString() == "Input")
                         myParm.Value = ParametersValue[i].ToString();
+                    if (ParametersType[i].ToString() == "VarChar")
+                        myParm.Size = ParametersSize[i];
                     if (ParametersDirection[i].ToString() == "ReturnValue")
                         iReturnValue = i;
                     this.cmd.Parameters.Add(myParm);
@@ -715,6 +721,166 @@ namespace InvoiceBill.DAO
                 }
                 this.cmd.ExecuteNonQuery();
 
+                return this.cmd.Parameters[iReturnValue].Value.ToString();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string[] ParametersOut)
+        {
+            int iReturnValue = 0;
+            int iOutValue = 0;
+            int iInOutValue = 0;
+            string[] sOutString = new string[Parameters.Length];
+            try
+            {
+                this.cmd.Parameters.Clear();
+                this.cmd.CommandText = StoredProcedureName;
+                this.cmd.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < Parameters.Length; i++)
+                {
+                    SqlParameter myParm = new SqlParameter(
+                        Parameters[i],
+                        (SqlDbType)Enum.Parse(typeof(SqlDbType), ParametersType[i].ToString()), ParametersValue[i].Length+5
+                        );
+                    if (ParametersDirection[i].ToString() == "Input")
+                    {
+                        myParm.Value = ParametersValue[i].ToString();
+                        sOutString[i] = "0";
+
+
+                    }
+                    if (ParametersDirection[i].ToString() == "ReturnValue")
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iReturnValue = i;
+                    }
+                    if (ParametersDirection[i].ToString() == "Output")
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iOutValue = i;
+                    }
+                    if (ParametersDirection[i].ToString() == "InputOutput")
+                    {
+                        myParm.Value = ParametersValue[i].ToString();
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iInOutValue = i;
+                    }
+                    this.cmd.Parameters.Add(myParm);
+
+                }
+                this.cmd.ExecuteNonQuery();
+
+                for (int i = 0; i < this.cmd.Parameters.Count; i++)
+                {
+                    sOutString[i] = this.cmd.Parameters[i].Value.ToString();
+                }
+                //sOutString[iOutValue] = this.cmd.Parameters[iOutValue].Value.ToString();
+                //sOutString[iInOutValue] = this.cmd.Parameters[iInOutValue].Value.ToString();
+                ParametersOut = sOutString;
+                return this.cmd.Parameters[iReturnValue].Value.ToString();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string Id,out string Errmsg)
+        {
+            int iReturnValue = 0;
+            int iOutValue = 0;
+            int iId = 0;
+
+            try
+            {
+                this.cmd.Parameters.Clear();
+                this.cmd.CommandText = StoredProcedureName;
+                this.cmd.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < Parameters.Length; i++)
+                {
+                    SqlParameter myParm = new SqlParameter(
+                        Parameters[i],
+                        (SqlDbType)Enum.Parse(typeof(SqlDbType), ParametersType[i].ToString()), ParametersValue[i].Length+1
+                        );
+                    if (ParametersDirection[i].ToString() == "Input")
+                        myParm.Value = ParametersValue[i].ToString();
+                    if (ParametersDirection[i].ToString() == "ReturnValue")
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iReturnValue = i;
+                    }
+                    if ((ParametersDirection[i].ToString() == "Output")&(Parameters[i].ToString() == "@InvSeqId"))
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iId = i;
+                    }
+                    if ((ParametersDirection[i].ToString() == "Output") & (Parameters[i].ToString() == "@Msg"))
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iOutValue = i;
+                    }
+                    this.cmd.Parameters.Add(myParm);
+
+                }
+                this.cmd.ExecuteNonQuery();
+
+                Errmsg = this.cmd.Parameters[iOutValue].Value.ToString();
+                Id = this.cmd.Parameters[iId].Value.ToString();
+                return this.cmd.Parameters[iReturnValue].Value.ToString();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string ExecuteSP(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, int[] ParametersSize,out string Id, out string Errmsg)
+        {
+            int iReturnValue = 0;
+            int iOutValue = 0;
+            int iId = 0;
+
+            try
+            {
+                this.cmd.Parameters.Clear();
+                this.cmd.CommandText = StoredProcedureName;
+                this.cmd.CommandType = CommandType.StoredProcedure;
+                for (int i = 0; i < Parameters.Length; i++)
+                {
+                    SqlParameter myParm = new SqlParameter(
+                        Parameters[i],
+                        (SqlDbType)Enum.Parse(typeof(SqlDbType), ParametersType[i].ToString()), ParametersSize[i]
+                        );
+                    if (ParametersDirection[i].ToString() == "Input")
+                        myParm.Value = ParametersValue[i].ToString();
+                    if (ParametersDirection[i].ToString() == "ReturnValue")
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iReturnValue = i;
+                    }
+                    if ((ParametersDirection[i].ToString() == "Output") & (Parameters[i].ToString() == "@InvSeqId"))
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iId = i;
+                    }
+                    if ((ParametersDirection[i].ToString() == "Output") & (Parameters[i].ToString() == "@Msg"))
+                    {
+                        myParm.Direction = (ParameterDirection)Enum.Parse(typeof(ParameterDirection), ParametersDirection[i].ToString());
+                        iOutValue = i;
+                    }
+                    this.cmd.Parameters.Add(myParm);
+
+                }
+                this.cmd.ExecuteNonQuery();
+
+                Errmsg = this.cmd.Parameters[iOutValue].Value.ToString();
+                Id = this.cmd.Parameters[iId].Value.ToString();
                 return this.cmd.Parameters[iReturnValue].Value.ToString();
 
             }

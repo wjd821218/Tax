@@ -47,9 +47,12 @@
     <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPivotGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,12 +70,39 @@
   <ItemGroup>
     <Compile Include="Base64.cs" />
     <Compile Include="Basic\ComStruct.cs" />
+    <Compile Include="Basic\frmBasicBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmBasicBase.Designer.cs">
+      <DependentUpon>frmBasicBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\frmSelCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmSelCust.Designer.cs">
+      <DependentUpon>frmSelCust.cs</DependentUpon>
+    </Compile>
     <Compile Include="Basic\frmSelectData.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Basic\frmSelectData.Designer.cs">
       <DependentUpon>frmSelectData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Basic\frmTaxCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmTaxCust.Designer.cs">
+      <DependentUpon>frmTaxCust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\frmTaxArt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmTaxArt.Designer.cs">
+      <DependentUpon>frmTaxArt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\HttpRequest.cs" />
+    <Compile Include="Basic\PublicClass.cs" />
+    <Compile Include="Basic\PublicUtility.cs" />
     <Compile Include="DAO\CommonDataConfig.cs" />
     <Compile Include="DAO\CommonFactory.cs" />
     <Compile Include="DAO\CommonInterface.cs" />
@@ -97,11 +127,47 @@
     <Compile Include="frmInvConfig.Designer.cs">
       <DependentUpon>frmInvConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmInvoiceNegativeBillEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoiceNegativeBillEx.Designer.cs">
+      <DependentUpon>frmInvoiceNegativeBillEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPendingInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPendingInvoice.Designer.cs">
+      <DependentUpon>frmPendingInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoicePrintRemote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoicePrintRemote.Designer.cs">
+      <DependentUpon>frmInvoicePrintRemote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoiceQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoiceQuery.Designer.cs">
+      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoiceNegativeBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoiceNegativeBill.Designer.cs">
+      <DependentUpon>frmInvoiceNegativeBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInvoiceBill.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmInvoiceBill.Designer.cs">
       <DependentUpon>frmInvoiceBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoiceByCustEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoiceByCustEx.Designer.cs">
+      <DependentUpon>frmInvoiceByCustEx.cs</DependentUpon>
     </Compile>
     <Compile Include="frmInvoiceByCust.cs">
       <SubType>Form</SubType>
@@ -139,10 +205,31 @@
     <Compile Include="frmPrintWeb.Designer.cs">
       <DependentUpon>frmPrintWeb.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSpecialInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpecialInvoice.Designer.cs">
+      <DependentUpon>frmSpecialInvoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Basic\frmBasicBase.resx">
+      <DependentUpon>frmBasicBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmSelCust.resx">
+      <DependentUpon>frmSelCust.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Basic\frmSelectData.resx">
       <DependentUpon>frmSelectData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmTaxCust.resx">
+      <DependentUpon>frmTaxCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmTaxArt.resx">
+      <DependentUpon>frmTaxArt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBase.resx">
+      <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBillSum.resx">
       <DependentUpon>frmBillSum.cs</DependentUpon>
@@ -150,8 +237,26 @@
     <EmbeddedResource Include="frmInvConfig.resx">
       <DependentUpon>frmInvConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoiceNegativeBillEx.resx">
+      <DependentUpon>frmInvoiceNegativeBillEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPendingInvoice.resx">
+      <DependentUpon>frmPendingInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoicePrintRemote.resx">
+      <DependentUpon>frmInvoicePrintRemote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoiceQuery.resx">
+      <DependentUpon>frmInvoiceQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoiceNegativeBill.resx">
+      <DependentUpon>frmInvoiceNegativeBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceBill.resx">
       <DependentUpon>frmInvoiceBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoiceByCustEx.resx">
+      <DependentUpon>frmInvoiceByCustEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceByCust.resx">
       <DependentUpon>frmInvoiceByCust.cs</DependentUpon>
@@ -170,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintWeb.resx">
       <DependentUpon>frmPrintWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpecialInvoice.resx">
+      <DependentUpon>frmSpecialInvoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -196,6 +304,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="20181126085336769_easyicon_net_48.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
