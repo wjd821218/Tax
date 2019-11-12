@@ -12,6 +12,8 @@ using TaxDll;
 using DevExpress.XtraEditors;
 using DevExpress.Skins;
 using InvoiceBill.Basic;
+using DevExpress.XtraTab;
+using InvoiceBill.SysManger;
 
 namespace InvoiceBill
 {
@@ -101,17 +103,6 @@ namespace InvoiceBill
             Application.Exit();
         }
 
-        private void menuConfig_Click(object sender, EventArgs e)
-        {
-            frmInvConfig ofrmInvConfig = new frmInvConfig();
-
-            ofrmInvConfig.TopLevel = false;
-            ofrmInvConfig.Dock = DockStyle.Fill;
-            ofrmInvConfig.Parent = panel2;
-            ofrmInvConfig.BringToFront();
-            ofrmInvConfig.Show();
-        }
-
          public  void refreshInfo()
         {
             lblTaxNo.Text = lblTaxNo.Text + oComTaxCard._OpenTaxInfo.sTaxCode;
@@ -157,13 +148,11 @@ namespace InvoiceBill
 
         private void TaxClose()
         {
-            oComTaxCard.InvCloseCard();
-
-            if (oComTaxCard.iResult == 0)
+            if (oComTaxCard.InvCloseCard() == 0)
             {
                 formInit();
             }
-            else MessageBox.Show(oComTaxCard.sRetMsg);
+            else MessageBox.Show("关闭金税卡失败！");
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -173,13 +162,13 @@ namespace InvoiceBill
         private void 按单快速开票ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmInvoiceBill ofrmInvoiceBill = new frmInvoiceBill();
-
+            Add_TabPage("ofrmInvoiceBill", "按单快速开票", ofrmInvoiceBill);
             //CreateForm("frmInvoiceBill", "InvoiceBill");
-            ofrmInvoiceBill.TopLevel = false;
+            /*ofrmInvoiceBill.TopLevel = false;
             ofrmInvoiceBill.Dock = DockStyle.Fill;
             ofrmInvoiceBill.Parent = panel2;
             ofrmInvoiceBill.BringToFront();
-            ofrmInvoiceBill.Show();
+            ofrmInvoiceBill.Show();*/
         }
 
         private void 按客户汇总开票ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -188,14 +177,47 @@ namespace InvoiceBill
 
             frmBillSum ofrmBillSum = new frmBillSum();
 
-            //CreateForm("frmInvoiceBill", "InvoiceBill");
+            /*//CreateForm("frmInvoiceBill", "InvoiceBill");
             ofrmBillSum.TopLevel = false;
             ofrmBillSum.Dock = DockStyle.Fill;
+            //ofrmBillSum.FormBorderStyle =  FormBorderStyle.None;
             ofrmBillSum.Parent = panel2;
             ofrmBillSum.BringToFront();
-            ofrmBillSum.Show();
+            ofrmBillSum.Show();*/
+            Add_TabPage("ofrmBillSum", "按客户汇总开票", ofrmBillSum);
         }
+        public bool tabControlCheckHave(DevExpress.XtraTab.XtraTabControl tab, String tabName)
+        {
+            for (int i = 0; i < tab.TabPages.Count; i++)
+            {
+                if (tab.TabPages[i].Text == tabName)
+                {
+                    tab.SelectedTabPageIndex = i;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void Add_TabPage(string str, string sCaption, Form myForm)
+        {
+            if (tabControlCheckHave(tColMain, str))
+            {
+                return;
+            }
+            else
+            {
+                tColMain.TabPages.Add(str);
+                //tColMain.SelectedTabPage(tColMain.TabPages.Count - 1);
+                tColMain.SelectedTabPageIndex = tColMain.TabPages.Count - 1;
+                tColMain.SelectedTabPage.Text = sCaption;
 
+                myForm.FormBorderStyle = FormBorderStyle.None;
+                myForm.Dock = DockStyle.Fill;
+                myForm.TopLevel = false;
+                myForm.Show();
+                myForm.Parent = tColMain.SelectedTabPage;
+            }
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
             foreach (SkinContainer cnt in SkinManager.Default.Skins)
@@ -204,6 +226,7 @@ namespace InvoiceBill
             }
 
             if (sUserid != "1") MenuInit();
+            DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = "Office 2010 Blue";
         }
 
         private void cbbSkin_SelectedIndexChanged(object sender, EventArgs e)
@@ -216,119 +239,116 @@ namespace InvoiceBill
         private void 销售发票开票ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmInvoiceByCust ofrmInvoiceByCust = new frmInvoiceByCust();
-
-            //CreateForm("frmInvoiceBill", "InvoiceBill");
-            ofrmInvoiceByCust.TopLevel = false;
-            ofrmInvoiceByCust.Dock = DockStyle.Fill;
-            ofrmInvoiceByCust.Parent = panel2;
-            ofrmInvoiceByCust.BringToFront();
-            ofrmInvoiceByCust.Show();
-
+            Add_TabPage("ofrmInvoiceByCust", "销售发票开票", ofrmInvoiceByCust);
         }
 
         private void 远程打印ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             frmInvoicePrintRemote ofrmInvoicePrintRemote = new frmInvoicePrintRemote();
-
-            //CreateForm("frmInvoiceBill", "InvoiceBill");
-            ofrmInvoicePrintRemote.TopLevel = false;
-            ofrmInvoicePrintRemote.Dock = DockStyle.Fill;
-            ofrmInvoicePrintRemote.Parent = panel2;
-            ofrmInvoicePrintRemote.BringToFront();
-            ofrmInvoicePrintRemote.Show();
+            Add_TabPage("ofrmInvoicePrintRemote", "远程打印", ofrmInvoicePrintRemote);
         }
 
         private void 发票作废ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             frmInvoiceManager OfrmInvoiceManager = new frmInvoiceManager();
-
-            OfrmInvoiceManager.TopLevel = false;
-            OfrmInvoiceManager.Dock = DockStyle.Fill;
-            OfrmInvoiceManager.Parent = panel2;
-            OfrmInvoiceManager.BringToFront();
-            OfrmInvoiceManager.Show();
+            Add_TabPage("OfrmInvoiceManager", "发票管理", OfrmInvoiceManager);
         }
 
         private void meuInovie_Click(object sender, EventArgs e)
         {
             frmInvoiceByCustEx OfrmInvoiceByCustEx = new frmInvoiceByCustEx();
-
-            OfrmInvoiceByCustEx.TopLevel = false;
-            OfrmInvoiceByCustEx.Dock = DockStyle.Fill;
-            OfrmInvoiceByCustEx.Parent = panel2;
-            OfrmInvoiceByCustEx.BringToFront();
-            OfrmInvoiceByCustEx.Show();
-            
+            Add_TabPage("OfrmInvoiceByCustEx", "普通发票红字发票开票", OfrmInvoiceByCustEx);
         }
 
         private void 普通发票红字开票ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             frmInvoiceBillNegative ofrmInvoiceBillNegative = new frmInvoiceBillNegative();
+            Add_TabPage("ofrmInvoiceBillNegative", "发票红字开票（处理未作废）", ofrmInvoiceBillNegative);
 
-            ofrmInvoiceBillNegative.TopLevel = false;
-            ofrmInvoiceBillNegative.Dock = DockStyle.Fill;
-            ofrmInvoiceBillNegative.Parent = panel2;
-            ofrmInvoiceBillNegative.BringToFront();
-            ofrmInvoiceBillNegative.Show();
-            
         }
 
         private void 发票查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmInvoiceQuery ofrmInvoiceQuery = new frmInvoiceQuery();
-
-            ofrmInvoiceQuery.TopLevel = false;
-            ofrmInvoiceQuery.Dock = DockStyle.Fill;
-            ofrmInvoiceQuery.Parent = panel2;
-            ofrmInvoiceQuery.BringToFront();
-            ofrmInvoiceQuery.Show();
+            Add_TabPage("ofrmInvoiceQuery", "发票查询", ofrmInvoiceQuery);
         }
 
         private void 开票申请ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmPendingInvoice ofrmPendingInvoice = new frmPendingInvoice();
-
-            ofrmPendingInvoice.TopLevel = false;
-            ofrmPendingInvoice.Dock = DockStyle.Fill;
-            ofrmPendingInvoice.Parent = panel2;
-            ofrmPendingInvoice.BringToFront();
-            ofrmPendingInvoice.Show();
+            Add_TabPage("ofrmPendingInvoice", "未开发票查询", ofrmPendingInvoice);
         }
 
         private void 税收分类编码维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTaxArt ofrmTaxArt = new frmTaxArt();
-
-            ofrmTaxArt.TopLevel = false;
-            ofrmTaxArt.Dock = DockStyle.Fill;
-            ofrmTaxArt.Parent = panel2;
-            ofrmTaxArt.BringToFront();
-            ofrmTaxArt.Show();
+            Add_TabPage("ofrmTaxArt", "税收分类编码维护", ofrmTaxArt);
         }
 
         private void 开票资料维护ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTaxCust ofrmTaxCust = new frmTaxCust();
-
-            ofrmTaxCust.TopLevel = false;
-            ofrmTaxCust.Dock = DockStyle.Fill;
-            ofrmTaxCust.Parent = panel2;
-            ofrmTaxCust.BringToFront();
-            ofrmTaxCust.Show();
+            Add_TabPage("ofrmTaxCust", "开票资料维护", ofrmTaxCust);
         }
 
         private void 特殊红字开票ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmInvoiceNegativeBillEx ofrmInvoiceNegativeBillEx = new frmInvoiceNegativeBillEx();
+            Add_TabPage("ofrmInvoiceNegativeBillEx", "特殊红字开票", ofrmInvoiceNegativeBillEx);
+        }
 
-            ofrmInvoiceNegativeBillEx.TopLevel = false;
-            ofrmInvoiceNegativeBillEx.Dock = DockStyle.Fill;
-            ofrmInvoiceNegativeBillEx.Parent = panel2;
-            ofrmInvoiceNegativeBillEx.BringToFront();
-            ofrmInvoiceNegativeBillEx.Show();
+        private void menuConfig_DoubleClick(object sender, EventArgs e)
+        {
+            frmInvConfig ofrmInvConfig = new frmInvConfig();
+            Add_TabPage("ofrmInvConfig", "开票配置", ofrmInvConfig);
+        }
+
+        private void 按月汇总开票ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBillSumMonth ofrmBillSumMonth = new frmBillSumMonth();
+            Add_TabPage("ofrmBillSumMonth", "按月汇总开票", ofrmBillSumMonth);
+        }
+
+        private void 按原单红字发票ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInvoiceNegativeBillExEx ofrmInvoiceNegativeBillExEx = new frmInvoiceNegativeBillExEx();
+            Add_TabPage("ofrmInvoiceNegativeBillExEx", "按原单红字发票", ofrmInvoiceNegativeBillExEx);
+        }
+
+        private void tColMain_CloseButtonClick(object sender, EventArgs e)
+        {
+            DevExpress.XtraTab.ViewInfo.ClosePageButtonEventArgs EArg = (DevExpress.XtraTab.ViewInfo.ClosePageButtonEventArgs)e;
+            string name = EArg.Page.Text;//得到关闭的选项卡的text
+            foreach (XtraTabPage page in tColMain.TabPages)//遍历得到和关闭的选项卡一样的Text
+            {
+                if (page.Text == name)
+                {
+                    tColMain.TabPages.Remove(page);
+                    page.Dispose();
+                    return;
+                }
+            }
+        }
+
+        private void 普通发票填开ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInvoice ofrmInvoice = new frmInvoice();
+            Add_TabPage("ofrmInvoice", "发票填开", ofrmInvoice);
+        }
+
+        private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUser ofrmUser = new frmUser();
+            Add_TabPage("ofrmUser", "用户管理", ofrmUser);
+        }
+
+        private void 角色管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRole ofrmRole = new frmRole();
+            Add_TabPage("ofrmRole", "角色管理", ofrmRole);
         }
     }
 }

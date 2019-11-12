@@ -39,7 +39,7 @@ namespace InvoiceBill.Basic
                     break;
 
                 case ComStruct.selDept:    //客户
-                    sSQL = "SELECT DEPTID AS ID,DEPTNAME AS NAME  FROM t_dept WHERE DEPTID = '"+ sFilter  + "' OR DEPTNAME LIKE '%" + sFilter + "%'";
+                    sSQL = "SELECT DEPTID AS ID,DEPTNAME AS NAME  FROM t_dept  ";
                     break;
             }
             dtl = GetDataBySelect(sSQL);

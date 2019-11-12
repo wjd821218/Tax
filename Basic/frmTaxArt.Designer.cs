@@ -40,10 +40,12 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.chkAll = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.CentrePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAll.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -66,11 +68,12 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(712, 16);
+            this.btnFilter.Location = new System.Drawing.Point(701, 16);
             this.btnFilter.Size = new System.Drawing.Size(75, 34);
             // 
             // CentrePanel
             // 
+            this.CentrePanel.Controls.Add(this.chkAll);
             this.CentrePanel.Controls.Add(this.txtFactory);
             this.CentrePanel.Controls.Add(this.label2);
             this.CentrePanel.Controls.Add(this.txtSpec);
@@ -85,6 +88,7 @@
             this.CentrePanel.Controls.SetChildIndex(this.txtSpec, 0);
             this.CentrePanel.Controls.SetChildIndex(this.label2, 0);
             this.CentrePanel.Controls.SetChildIndex(this.txtFactory, 0);
+            this.CentrePanel.Controls.SetChildIndex(this.chkAll, 0);
             // 
             // panel1
             // 
@@ -186,18 +190,27 @@
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 2;
             // 
+            // chkAll
+            // 
+            this.chkAll.Location = new System.Drawing.Point(566, 18);
+            this.chkAll.Name = "chkAll";
+            this.chkAll.Properties.Caption = "查看所有品种";
+            this.chkAll.Size = new System.Drawing.Size(106, 19);
+            this.chkAll.TabIndex = 12;
+            // 
             // frmTaxArt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "frmTaxArt";
-            this.Text = "frmTaxArt";
+            this.Text = "税收分类编码维护";
             ((System.ComponentModel.ISupportInitialize)(this.ds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.CentrePanel.ResumeLayout(false);
             this.CentrePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAll.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,5 +230,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraEditors.CheckEdit chkAll;
     }
 }

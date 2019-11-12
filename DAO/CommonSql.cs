@@ -47,7 +47,9 @@ namespace InvoiceBill.DAO
 				}
 				this.conn = new SqlConnection(connstr);
 				this.cmd = new SqlCommand();
-				cmd.Connection = this.conn;
+                this.cmd.CommandTimeout = 300;
+
+                cmd.Connection = this.conn;
 				this.conn.Open();
 			}
 			catch (Exception e)

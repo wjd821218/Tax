@@ -60,13 +60,15 @@
             this.gColAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColTaxCustName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColNotes = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColTaxRate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -286,6 +288,7 @@
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
             // 
             // gridView1
             // 
@@ -300,13 +303,15 @@
             this.gColAmount,
             this.gridColumn5,
             this.gColTaxCustName,
-            this.gridColumn7,
-            this.gridColumn2,
             this.gridColumn1,
             this.gridColumn8,
-            this.gridColumn9,
-            this.gColNotes,
-            this.gColTaxRate});
+            this.gColTaxRate,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn9});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.MultiSelect = true;
@@ -344,7 +349,7 @@
             this.gColInvNo.FieldName = "INVOICENO";
             this.gColInvNo.Name = "gColInvNo";
             this.gColInvNo.Visible = true;
-            this.gColInvNo.VisibleIndex = 12;
+            this.gColInvNo.VisibleIndex = 9;
             // 
             // gColInvCode
             // 
@@ -352,7 +357,7 @@
             this.gColInvCode.FieldName = "INVOICECODE";
             this.gColInvCode.Name = "gColInvCode";
             this.gColInvCode.Visible = true;
-            this.gColInvCode.VisibleIndex = 13;
+            this.gColInvCode.VisibleIndex = 10;
             // 
             // gColAmount
             // 
@@ -365,66 +370,34 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "开票时间";
-            this.gridColumn5.FieldName = "EndDate";
+            this.gridColumn5.FieldName = "INVDATE";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
             // 
             // gColTaxCustName
             // 
-            this.gColTaxCustName.Caption = "开票抬头";
-            this.gColTaxCustName.FieldName = "TAXCUSTNAME";
+            this.gColTaxCustName.Caption = "开票员";
+            this.gColTaxCustName.FieldName = "USERNAME";
             this.gColTaxCustName.Name = "gColTaxCustName";
             this.gColTaxCustName.Visible = true;
             this.gColTaxCustName.VisibleIndex = 6;
             // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "税号";
-            this.gridColumn7.FieldName = "TAXNO";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "开户行";
-            this.gridColumn2.FieldName = "BANKNAME";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 7;
-            // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "银行账号";
-            this.gridColumn1.FieldName = "BANKACCOUNT";
+            this.gridColumn1.Caption = "发票状态";
+            this.gridColumn1.FieldName = "CANCELED";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 8;
+            this.gridColumn1.VisibleIndex = 7;
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "地址";
-            this.gridColumn8.FieldName = "ADDRESS";
+            this.gridColumn8.Caption = "发票类别";
+            this.gridColumn8.FieldName = "INVTYPENAME";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 10;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "电话";
-            this.gridColumn9.FieldName = "CONTACTPHONE";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 15;
-            // 
-            // gColNotes
-            // 
-            this.gColNotes.Caption = "备注";
-            this.gColNotes.FieldName = "NOTES";
-            this.gColNotes.Name = "gColNotes";
-            this.gColNotes.Visible = true;
-            this.gColNotes.VisibleIndex = 11;
+            this.gridColumn8.VisibleIndex = 8;
             // 
             // gColTaxRate
             // 
@@ -432,7 +405,55 @@
             this.gColTaxRate.FieldName = "TAXRATE";
             this.gColTaxRate.Name = "gColTaxRate";
             this.gColTaxRate.Visible = true;
-            this.gColTaxRate.VisibleIndex = 14;
+            this.gColTaxRate.VisibleIndex = 17;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "税号";
+            this.gridColumn2.FieldName = "TAXNO";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 11;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "开户行";
+            this.gridColumn3.FieldName = "BANKNAME";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 12;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "帐号";
+            this.gridColumn4.FieldName = "BANKACCOUNT";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 13;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "地址";
+            this.gridColumn6.FieldName = "ADDRESS";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 14;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "电话";
+            this.gridColumn7.FieldName = "CONTACTPHONE";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 15;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "税控抬头";
+            this.gridColumn9.FieldName = "TAXCUSTNAME";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 16;
             // 
             // panel2
             // 
@@ -486,15 +507,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColAmount;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gColTaxCustName;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtCashier;
         private System.Windows.Forms.TextBox txtChecker;
-        private DevExpress.XtraGrid.Columns.GridColumn gColNotes;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbbBillMode;
@@ -503,5 +520,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColInvCode;
         private DevExpress.XtraGrid.Columns.GridColumn gColTaxRate;
         private System.Windows.Forms.ComboBox cbbDept;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }

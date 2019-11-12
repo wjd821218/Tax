@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBasicBase));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -122,7 +121,7 @@
             // 
             // btnSelected
             // 
-            this.btnSelected.Image = ((System.Drawing.Image)(resources.GetObject("btnSelected.Image")));
+            this.btnSelected.Image = global::InvoiceBill.Properties.Resources.apply_32x32;
             this.btnSelected.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSelected.Name = "btnSelected";
             this.btnSelected.Size = new System.Drawing.Size(52, 22);
@@ -130,7 +129,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Image")));
+            this.btnExport.Image = global::InvoiceBill.Properties.Resources.export_32x32;
             this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(52, 22);
@@ -139,7 +138,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnQuery.Image")));
+            this.btnQuery.Image = global::InvoiceBill.Properties.Resources.convert_32x32;
             this.btnQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(52, 22);
@@ -148,7 +147,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Image = global::InvoiceBill.Properties.Resources.apply_32x32;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(52, 22);
@@ -157,7 +156,7 @@
             // 
             // btnDel
             // 
-            this.btnDel.Image = ((System.Drawing.Image)(resources.GetObject("btnDel.Image")));
+            this.btnDel.Image = global::InvoiceBill.Properties.Resources.close_32x32;
             this.btnDel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(52, 22);
@@ -165,7 +164,7 @@
             // 
             // btnView
             // 
-            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
+            this.btnView.Image = global::InvoiceBill.Properties.Resources.show_32x32;
             this.btnView.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(52, 22);
@@ -173,7 +172,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Image = global::InvoiceBill.Properties.Resources.editname_32x32;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(52, 22);
@@ -181,7 +180,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Image = global::InvoiceBill.Properties.Resources.add_32x32;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(52, 22);

@@ -36,8 +36,10 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.chkDirect = new DevExpress.XtraEditors.CheckEdit();
             this.chkNoBill = new System.Windows.Forms.CheckBox();
             this.cbbInvType = new DevExpress.XtraEditors.LookUpEdit();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
@@ -88,6 +90,8 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColBseqId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColCustCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColCustId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColCustName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -95,11 +99,11 @@
             this.gColInvAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColBillDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.adornerUIManager1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDirect.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbInvType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBank.Properties)).BeginInit();
@@ -179,6 +183,16 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 40);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(36, 37);
+            this.btnRefresh.Text = "刷新";
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
@@ -191,6 +205,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.chkDirect);
             this.panelControl1.Controls.Add(this.chkNoBill);
             this.panelControl1.Controls.Add(this.cbbInvType);
             this.panelControl1.Controls.Add(this.labelControl11);
@@ -220,6 +235,14 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(928, 130);
             this.panelControl1.TabIndex = 1;
+            // 
+            // chkDirect
+            // 
+            this.chkDirect.Location = new System.Drawing.Point(837, 39);
+            this.chkDirect.Name = "chkDirect";
+            this.chkDirect.Properties.Caption = "转红字";
+            this.chkDirect.Size = new System.Drawing.Size(75, 19);
+            this.chkDirect.TabIndex = 26;
             // 
             // chkNoBill
             // 
@@ -489,6 +512,7 @@
             this.gridView2.OptionsView.ShowFooter = true;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView2_SelectionChanged);
+            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gridView2.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridView2_RowUpdated);
             this.gridView2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridView2_KeyUp);
             this.gridView2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gridView2_KeyPress);
@@ -503,7 +527,7 @@
             this.gColDBseqId.OptionsColumn.AllowFocus = false;
             this.gColDBseqId.Visible = true;
             this.gColDBseqId.VisibleIndex = 1;
-            this.gColDBseqId.Width = 55;
+            this.gColDBseqId.Width = 49;
             // 
             // gColiLineNo
             // 
@@ -514,18 +538,18 @@
             this.gColiLineNo.OptionsColumn.AllowFocus = false;
             this.gColiLineNo.Visible = true;
             this.gColiLineNo.VisibleIndex = 2;
-            this.gColiLineNo.Width = 55;
+            this.gColiLineNo.Width = 49;
             // 
             // gColBillTypeId
             // 
             this.gColBillTypeId.Caption = "票据类型";
-            this.gColBillTypeId.FieldName = "INVTYPEID";
+            this.gColBillTypeId.FieldName = "BILLTYPEID";
             this.gColBillTypeId.Name = "gColBillTypeId";
             this.gColBillTypeId.OptionsColumn.AllowEdit = false;
             this.gColBillTypeId.OptionsColumn.AllowFocus = false;
             this.gColBillTypeId.Visible = true;
             this.gColBillTypeId.VisibleIndex = 3;
-            this.gColBillTypeId.Width = 62;
+            this.gColBillTypeId.Width = 64;
             // 
             // gColArtId
             // 
@@ -536,7 +560,7 @@
             this.gColArtId.OptionsColumn.AllowFocus = false;
             this.gColArtId.Visible = true;
             this.gColArtId.VisibleIndex = 4;
-            this.gColArtId.Width = 65;
+            this.gColArtId.Width = 57;
             // 
             // gColArtCode
             // 
@@ -545,6 +569,7 @@
             this.gColArtCode.Name = "gColArtCode";
             this.gColArtCode.Visible = true;
             this.gColArtCode.VisibleIndex = 5;
+            this.gColArtCode.Width = 66;
             // 
             // gColName
             // 
@@ -555,7 +580,7 @@
             this.gColName.OptionsColumn.AllowFocus = false;
             this.gColName.Visible = true;
             this.gColName.VisibleIndex = 6;
-            this.gColName.Width = 60;
+            this.gColName.Width = 53;
             // 
             // gColSpec
             // 
@@ -566,7 +591,7 @@
             this.gColSpec.OptionsColumn.AllowFocus = false;
             this.gColSpec.Visible = true;
             this.gColSpec.VisibleIndex = 7;
-            this.gColSpec.Width = 56;
+            this.gColSpec.Width = 49;
             // 
             // gColFactory
             // 
@@ -577,7 +602,7 @@
             this.gColFactory.OptionsColumn.AllowFocus = false;
             this.gColFactory.Visible = true;
             this.gColFactory.VisibleIndex = 8;
-            this.gColFactory.Width = 51;
+            this.gColFactory.Width = 45;
             // 
             // gColUnit
             // 
@@ -588,7 +613,7 @@
             this.gColUnit.OptionsColumn.AllowFocus = false;
             this.gColUnit.Visible = true;
             this.gColUnit.VisibleIndex = 9;
-            this.gColUnit.Width = 51;
+            this.gColUnit.Width = 45;
             // 
             // gridColumn13
             // 
@@ -604,7 +629,7 @@
             this.gColInvTotal.Name = "gColInvTotal";
             this.gColInvTotal.Visible = true;
             this.gColInvTotal.VisibleIndex = 10;
-            this.gColInvTotal.Width = 51;
+            this.gColInvTotal.Width = 45;
             // 
             // gColPrice
             // 
@@ -615,7 +640,7 @@
             this.gColPrice.OptionsColumn.AllowFocus = false;
             this.gColPrice.Visible = true;
             this.gColPrice.VisibleIndex = 11;
-            this.gColPrice.Width = 51;
+            this.gColPrice.Width = 45;
             // 
             // gColDInvAmount
             // 
@@ -626,7 +651,7 @@
             this.gColDInvAmount.OptionsColumn.AllowFocus = false;
             this.gColDInvAmount.Visible = true;
             this.gColDInvAmount.VisibleIndex = 12;
-            this.gColDInvAmount.Width = 51;
+            this.gColDInvAmount.Width = 45;
             // 
             // gColDAmount
             // 
@@ -637,7 +662,7 @@
             this.gColDAmount.OptionsColumn.AllowFocus = false;
             this.gColDAmount.Visible = true;
             this.gColDAmount.VisibleIndex = 13;
-            this.gColDAmount.Width = 51;
+            this.gColDAmount.Width = 45;
             // 
             // gColPengingTotal
             // 
@@ -648,7 +673,7 @@
             this.gColPengingTotal.OptionsColumn.AllowFocus = false;
             this.gColPengingTotal.Visible = true;
             this.gColPengingTotal.VisibleIndex = 14;
-            this.gColPengingTotal.Width = 51;
+            this.gColPengingTotal.Width = 45;
             // 
             // gColDPendingAmount
             // 
@@ -659,7 +684,7 @@
             this.gColDPendingAmount.OptionsColumn.AllowFocus = false;
             this.gColDPendingAmount.Visible = true;
             this.gColDPendingAmount.VisibleIndex = 15;
-            this.gColDPendingAmount.Width = 51;
+            this.gColDPendingAmount.Width = 45;
             // 
             // gColTaxRate
             // 
@@ -696,6 +721,8 @@
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColBseqId,
+            this.gridColumn1,
+            this.gridColumn2,
             this.gColCustCode,
             this.gColCustId,
             this.gColCustName,
@@ -721,7 +748,23 @@
             this.gColBseqId.OptionsColumn.AllowEdit = false;
             this.gColBseqId.OptionsColumn.AllowFocus = false;
             this.gColBseqId.Visible = true;
-            this.gColBseqId.VisibleIndex = 1;
+            this.gColBseqId.VisibleIndex = 3;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "票据类别编码";
+            this.gridColumn1.FieldName = "BILLTYPEID";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "票据类别";
+            this.gridColumn2.FieldName = "BILLTYPENAME";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gColCustCode
             // 
@@ -729,7 +772,7 @@
             this.gColCustCode.FieldName = "CUSTCODE";
             this.gColCustCode.Name = "gColCustCode";
             this.gColCustCode.Visible = true;
-            this.gColCustCode.VisibleIndex = 2;
+            this.gColCustCode.VisibleIndex = 4;
             // 
             // gColCustId
             // 
@@ -739,7 +782,7 @@
             this.gColCustId.OptionsColumn.AllowEdit = false;
             this.gColCustId.OptionsColumn.AllowFocus = false;
             this.gColCustId.Visible = true;
-            this.gColCustId.VisibleIndex = 3;
+            this.gColCustId.VisibleIndex = 5;
             // 
             // gColCustName
             // 
@@ -749,7 +792,7 @@
             this.gColCustName.OptionsColumn.AllowEdit = false;
             this.gColCustName.OptionsColumn.AllowFocus = false;
             this.gColCustName.Visible = true;
-            this.gColCustName.VisibleIndex = 4;
+            this.gColCustName.VisibleIndex = 6;
             // 
             // gColPengingAmount
             // 
@@ -759,7 +802,7 @@
             this.gColPengingAmount.OptionsColumn.AllowEdit = false;
             this.gColPengingAmount.OptionsColumn.AllowFocus = false;
             this.gColPengingAmount.Visible = true;
-            this.gColPengingAmount.VisibleIndex = 5;
+            this.gColPengingAmount.VisibleIndex = 7;
             // 
             // gColInvAmount
             // 
@@ -769,7 +812,7 @@
             this.gColInvAmount.OptionsColumn.AllowEdit = false;
             this.gColInvAmount.OptionsColumn.AllowFocus = false;
             this.gColInvAmount.Visible = true;
-            this.gColInvAmount.VisibleIndex = 6;
+            this.gColInvAmount.VisibleIndex = 8;
             this.gColInvAmount.Width = 132;
             // 
             // gColBillDate
@@ -780,22 +823,12 @@
             this.gColBillDate.OptionsColumn.AllowEdit = false;
             this.gColBillDate.OptionsColumn.AllowFocus = false;
             this.gColBillDate.Visible = true;
-            this.gColBillDate.VisibleIndex = 7;
+            this.gColBillDate.VisibleIndex = 9;
             // 
             // repositoryItemCheckEdit1
             // 
             this.repositoryItemCheckEdit1.AutoHeight = false;
             this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(36, 37);
-            this.btnRefresh.Text = "刷新";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmInvoiceByCust
             // 
@@ -822,6 +855,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkDirect.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbInvType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBank.Properties)).EndInit();
@@ -920,5 +954,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColCustCode;
         private System.Windows.Forms.CheckBox chkNoBill;
         private System.Windows.Forms.ToolStripButton btnRefresh;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraEditors.CheckEdit chkDirect;
     }
 }

@@ -154,6 +154,7 @@ namespace InvoiceBill
             myDt = PublicUtility.InvoiceBillDetail(sCurrentInvSeqId);
             int iTaxDetailCount = myDt.Rows.Count;
             //条目数大于8
+            frmMain.oComTaxCard._InvocieHeader.sInfoListName = "";
             if (iTaxDetailCount > 8) frmMain.oComTaxCard._InvocieHeader.sInfoListName = "详见销货清单";
 
             if (iTaxDetailCount > 0)
@@ -179,7 +180,7 @@ namespace InvoiceBill
 
             string[] sParameters = new string[6] { "result", "@BseqId", "@TaxRate", "@UserId", "@InvSeqId", "@Msg" };
 
-            string[] sParametersValue = new string[6] { "",sBseqId, iTaxRate.ToString(),"0","","" };
+            string[] sParametersValue = new string[6] { "",sBseqId, iTaxRate.ToString(), frmMain.sUserid, "","" };
             string[] sParametersType = new string[6] { "VarChar", "VarChar", "Int", "VarChar","Int", "VarChar" };
             string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input" , "Output", "Output" };
             int[] sParametersSize = new int[6] { 20, 20,20, 20,20,512 };
@@ -203,6 +204,9 @@ namespace InvoiceBill
                 if (InvoiceBillHeader(iItemId) == 1) { MessageBox.Show(sRetMsg); return 1; }
                 if (InvoiceBillDetail(iItemId) == 1) { MessageBox.Show(sRetMsg); return 1; }
 
+                if (Convert.ToString(row["INVTYPEID"]) == "2") frmMain.oComTaxCard.iInvType = 2;
+                if (Convert.ToString(row["INVTYPEID"]) == "1") frmMain.oComTaxCard.iInvType = 0;
+
                 if (chkShowPrint.Checked) frmMain.oComTaxCard.iInfoShowPrtDlg = 1;
                 else frmMain.oComTaxCard.iInfoShowPrtDlg = 0;
 
@@ -217,6 +221,7 @@ namespace InvoiceBill
                     }
                     else
                     {
+                        if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
                         if (chkPrint.Checked)
                         {
                             frmMain.oComTaxCard.InvPrint(int.Parse(frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()),
@@ -227,8 +232,7 @@ namespace InvoiceBill
                                 return 1;
                             }
                             if (PublicUtility.PrintBill(sCurrentInvSeqId) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
-                        }
-                        if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+                        }                        
 
                         //frmMain.refreshInfo();
                     }

@@ -131,14 +131,21 @@ namespace InvoiceBill
         private void button2_Click(object sender, EventArgs e)
         {
             int iResult = 0;
-
+            short iInfoKind = 0;
             int iCurrentItemId = gridView1.FocusedRowHandle;
 
             DataRow row = gridView1.GetDataRow(iCurrentItemId);
 
             string iCurrentBseqId = Convert.ToString(row["INVSEQID"]);
 
-            iResult = frmMain.oComTaxCard.InvCancel(Convert.ToInt32(row["INVOICENO"]), Convert.ToString(row["INVOICECODE"]));
+            if (cbbInvType.SelectedValue.ToString() == "1")
+            {
+                iInfoKind = 0;
+            }
+            else
+                iInfoKind = 2;
+
+            iResult = frmMain.oComTaxCard.InvCancel(iInfoKind,Convert.ToInt32(row["INVOICENO"]), Convert.ToString(row["INVOICECODE"]));
             if (iResult == 1)
             {
                 MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
@@ -147,3 +154,4 @@ namespace InvoiceBill
         }
     }
 }
+ 

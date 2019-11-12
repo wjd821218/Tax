@@ -36,7 +36,10 @@ namespace InvoiceBill.Basic
 
             if (txtFactory.Text.Trim() != "") { sFilter = sFilter + " AND FACTORY LIKE '%" + txtFactory.Text.Trim() + "%' "; }
 
-            sSQL = "SELECT ARTID,ARTCODE,NAME,SPEC,FACTORY,TAXCODE  FROM  T_ARTICLE WHERE 1=1  " + sFilter;
+            if (chkAll.Checked ) sSQL = "SELECT ARTID,ARTCODE,NAME,SPEC,FACTORY,TAXCODE  FROM  T_ARTICLE WHERE 1=1  " + sFilter;
+            else sSQL = "SELECT ARTID,ARTCODE,NAME,SPEC,FACTORY,TAXCODE  FROM  T_ARTICLE WHERE ARTID IN  (" +
+                    "SELECT ARTID FROM T_INV_PENDING_BILL_DETAIL  WHERE AMOUNT <> BSNAMOUNT  GROUP BY ARTID  )"
+                    + sFilter;
             DataRefresh(sSQL, "T_ARTICLE");
         }
 

@@ -52,6 +52,7 @@ namespace InvoiceBill
             cbbInvType.DataSource = GetDataTable(sInvoiceSql);
             cbbInvType.ValueMember = "INVTYPEID";
             cbbInvType.DisplayMember = "INVTYPENAME";
+            
             frmMain.oComTaxCard.iInvType = 0; //默认专票
         }
 
@@ -193,19 +194,25 @@ namespace InvoiceBill
             sRetMsg = "";
             sCurrentInvSeqId = "";
             string sInvTypeId = "";
-            sInvTypeId = cbbInvType.SelectedValue.ToString();
             DataRow row = gridView1.GetDataRow(iItemId);
+            //sInvTypeId = cbbInvType.SelectedValue.ToString();
+            sInvTypeId = Convert.ToString(row["INVTYPEID"]);
+            string sBseqId = Convert.ToString(row["BSEQID"]);
+
+            sDeptId = cbbDept.SelectedValue.ToString();
+            //sInvTypeId = row["INVTYPEID"].ToString();
+
             string ssCustId = row["CUSTID"].ToString();
             string sRaxRate = row["TAXRATE"].ToString();
 
             string spName = "p_fin_invoice_bill_Sum";
 
-            string[] sParameters = new string[9] { "result", "@InvTypeId", "@TaxRate", "@sCustId", "@BeginDate", "@EndDate", "@UserId", "@InvSeqId", "@Msg" };
+            string[] sParameters = new string[11] { "result", "@DeptId", "@BseqId", "@InvTypeId", "@TaxRate", "@sCustId", "@BeginDate", "@EndDate", "@UserId", "@InvSeqId", "@Msg" };
 
-            string[] sParametersValue = new string[9] {"", sInvTypeId, sRaxRate, ssCustId, sDateFrom,sDateTo,"0", "","" };
-            string[] sParametersType = new string[9] {"VarChar", "Int", "Int", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
-            string[] sParametersDirection = new string[9] { "ReturnValue", "Input", "Input", "Input", "Input", "Input", "Input", "Output","Output" };
-            int[] sParametersSize = new int[9] { 10, sInvTypeId.Length, sRaxRate.Length,sCustId.Length, sDateFrom.Length, sDateTo.Length, 20, 20, 512 };
+            string[] sParametersValue = new string[11] {"", sDeptId, sBseqId,sInvTypeId, sRaxRate, ssCustId, sDateFrom,sDateTo, frmMain.sUserid, "","" };
+            string[] sParametersType = new string[11] {"VarChar", "Int", "VarChar", "Int", "Int", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[11] { "ReturnValue", "Input", "Input", "Input", "Input", "Input", "Input", "Input", "Input", "Output","Output" };
+            int[] sParametersSize = new int[11] { 10, 10, sBseqId.Length, sInvTypeId.Length,sRaxRate.Length,ssCustId.Length, sDateFrom.Length, sDateTo.Length, 20, 20, 512 };
 
             iResult = int.Parse(PublicUtility.OperData(spName, sParameters, sParametersValue, sParametersType, sParametersDirection, sParametersSize, out sCurrentInvSeqId, out sRetMsg));
             return iResult;
@@ -226,35 +233,45 @@ namespace InvoiceBill
                 if (InvoiceBillHeader(iItemId) == 1) { MessageBox.Show(sRetMsg); return 1; }
                 if (InvoiceBillDetail(iItemId) == 1) { MessageBox.Show(sRetMsg); return 1; }
 
-                if (int.Parse(cbbInvType.SelectedValue.ToString()) == 2) frmMain.oComTaxCard.iInvType = 2;
-                if (int.Parse(cbbInvType.SelectedValue.ToString()) == 1) frmMain.oComTaxCard.iInvType = 0;
+                //if (int.Parse(cbbInvType.SelectedValue.ToString()) == 2) frmMain.oComTaxCard.iInvType = 2;
+                //if (int.Parse(cbbInvType.SelectedValue.ToString()) == 1) frmMain.oComTaxCard.iInvType = 0;
+                if (Convert.ToString(row["INVTYPEID"])=="2") frmMain.oComTaxCard.iInvType = 2;
+                if (Convert.ToString(row["INVTYPEID"]) == "1") frmMain.oComTaxCard.iInvType = 0;
 
-               //接口开具发票，不成功作废后台明细
-                if (frmMain.oComTaxCard.InvoiceBill() == 1)
+                short iInfoShowPrtDlg = 0;
+                if (chkShowPrint.Checked) iInfoShowPrtDlg = 1;
+
+                if (!chkEnable.Checked)
                 {
-                    MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
-                    if (PublicUtility.InvoiceCanceled(sCurrentInvSeqId) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
-                    return 1;
+                    //接口开具发票，不成功作废后台明细
+                    if (frmMain.oComTaxCard.InvoiceBill() == 1)
+                    {
+                        MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
+                        if (PublicUtility.InvoiceCanceled(sCurrentInvSeqId) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+                        return 1;
+                    }
+                    else
+                    {
+                        if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+
+                        if (chkPrint.Checked)
+                        {
+                            frmMain.oComTaxCard.InvPrint(int.Parse(frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()),
+                            frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, 0, iInfoShowPrtDlg);
+                            if (frmMain.oComTaxCard.iResult == 1)
+                            {
+                                MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
+                                return 1;
+                            }
+                            if (PublicUtility.PrintBill(sCurrentInvSeqId) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+                        }
+                        //{ MessageBox.Show(frmMain.oComTaxCard.sRetMsg); return 1; }                        
+                    }
                 }
                 else
                 {
-                    if (chkPrint.Checked)
-                    {
-                        frmMain.oComTaxCard.InvPrint(int.Parse(frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()),
-                        frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, 0, frmMain.oComTaxCard.iInfoShowPrtDlg);
-                        if (frmMain.oComTaxCard.iResult == 1)
-                        {
-                            MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
-                            return 1;
-                        }
-                        if (PublicUtility.PrintBill(sCurrentInvSeqId) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
-                    }
-                        //{ MessageBox.Show(frmMain.oComTaxCard.sRetMsg); return 1; }
-
-                    if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoTypeCode, frmMain.oComTaxCard._InvoiceRetInfo.sRetInfoNumber.ToString()) == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
-                }
-                
-               // if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, "111", "12345") == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+                    if (PublicUtility.InvoiceValidated(sCurrentInvSeqId, "111", "111") == -1) { MessageBox.Show(frmMain.sRetMsg); return 1; }
+                }               
             }
             return 0;
         }
@@ -321,11 +338,22 @@ namespace InvoiceBill
 
         private void btnBill_Click_1(object sender, EventArgs e)
         {
-            foreach (int i in gridView1.GetSelectedRows())
+            int iInvType = 0;
+            if (cbbInvType.SelectedValue.ToString() == "1")
             {
-                if (Invoice(i) == 1) { MessageBox.Show(sRetMsg); return; }
+                iInvType = 0;
             }
-            GetData();
+            else
+                iInvType = 2;
+
+            if (PublicUtility.ValidCustInfo(iInvType, gridView1) == 0)
+            {
+                foreach (int i in gridView1.GetSelectedRows())
+                {
+                    if (Invoice(i) == 1) { MessageBox.Show(sRetMsg); return; }
+                }
+                GetData();
+            }
 
         }
 
@@ -380,19 +408,32 @@ namespace InvoiceBill
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            iCurrentItemId = -1;
-            if (Invoice(0) == 1) { MessageBox.Show(sRetMsg); return; }
-            /*for (int i = 0; i < gridView1.RowCount - 1; i++)
+            int iInvType = 0;
+            if (cbbInvType.SelectedValue.ToString() == "1")
             {
-                Thread.Sleep(int.Parse(upTimerLong.Value.ToString()));
-                //if (gridView1.SelectedRowsCount > 0)
-                //{
-                //    iCurrentItemId = gridView1.FocusedRowHandle;
-                //后台生成发票明细
-                if (Invoice(i) == 1) { MessageBox.Show(sRetMsg); return; }
-                // }
-            }*/            
-            GetData();
+                iInvType = 0;
+            }
+            else
+                iInvType = 2;
+
+            if (PublicUtility.ValidCustInfo(iInvType,gridView1) ==0)
+            {
+                iCurrentItemId = -1;
+                if (Invoice(0) == 1) { MessageBox.Show(sRetMsg); return; }
+                /*for (int i = 0; i < gridView1.RowCount - 1; i++)
+                {
+                    Thread.Sleep(int.Parse(upTimerLong.Value.ToString()));
+                    //if (gridView1.SelectedRowsCount > 0)
+                    //{
+                    //    iCurrentItemId = gridView1.FocusedRowHandle;
+                    //后台生成发票明细
+                    if (Invoice(i) == 1) { MessageBox.Show(sRetMsg); return; }
+                    // }
+                }*/
+                GetData();
+
+            }
+
         }
 
         private void frmBillSum_Load(object sender, EventArgs e)
@@ -411,6 +452,11 @@ namespace InvoiceBill
         private void cbbDept_SelectedIndexChanged(object sender, EventArgs e)
         {
             sDeptId = cbbDept.SelectedValue.ToString();
+        }
+
+        private void txtCust_DoubleClick(object sender, EventArgs e)
+        {
+            txtCust.SelectAll();
         }
     }
 }

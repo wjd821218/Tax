@@ -10,12 +10,85 @@ using System.IO;
 using static InvoiceBill.Basic.ComStruct;
 using System.Web.Script.Serialization;
 using System.Configuration;
+using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraTreeList;
+using DevExpress.XtraTreeList.Nodes;
 
 namespace InvoiceBill.Basic
 {
+    public class CboItemEntity
+    {
+        private object _text = 0;
+        private object _Value = "";
+        /// <summary>
+        /// 显示值
+        /// </summary>
+        public object Text
+        {
+            get { return this._text; }
+            set { this._text = value; }
+        }
+        /// <summary>
+        /// 对象值
+        /// </summary>
+        public object Value
+        {
+            get { return this._Value; }
+            set { this._Value = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.Text.ToString();
+        }
+    }
 
     class PublicUtility
     {
+        public static string GetTreeCheckList(TreeList oTreeList)
+        {
+            string SelectValues = "";  
+
+            for (int i = 0; i < oTreeList.AllNodesCount; i++)
+            {
+                TreeListNode oNode = oTreeList.FindNodeByID(i);
+                if (oNode.Checked) SelectValues += oNode.GetValue(1).ToString() + ",";
+            }
+            return SelectValues ;
+            
+        }
+        public static string GetCheckList(CheckedListBoxControl oCheckedListBoxControl)
+        {
+            string SelectValues = "";
+
+            for (int i = 0; i < oCheckedListBoxControl.ItemCount; i++)
+            {
+                if (oCheckedListBoxControl.GetItemChecked(i))
+                {
+                    SelectValues += oCheckedListBoxControl.GetItemValue(i).ToString() + ",";
+                }
+            }
+            return SelectValues;
+
+        }
+        public static DataTable GetDataTable(string SqlOraStr)
+        {
+            CommonInterface pObj_Comm = CommonFactory.CreateInstance(CommonData.sql);
+            try
+            {
+                DataTable pDTMain = pObj_Comm.ExeForDtl(SqlOraStr);
+
+                pObj_Comm.Close();
+                return pDTMain;
+
+            }
+            catch (Exception ex)
+            {
+                pObj_Comm.Close();
+                throw ex;
+            }
+        }
         public static int PrintBill(string sInvSeqid)
         {
             int iResult = 0;
@@ -25,7 +98,7 @@ namespace InvoiceBill.Basic
 
             string[] sParameters = new string[4] { "result", "@InvSeqId", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[4] { "", sInvSeqid, "0", "" };
+            string[] sParametersValue = new string[4] { "", sInvSeqid, frmMain.sUserid, "" };
             string[] sParametersType = new string[4] { "VarChar", "VarChar", "Int", "VarChar" };
             string[] sParametersDirection = new string[4] { "ReturnValue", "Input", "Input", "Output" };
             int[] sParametersSize = new int[4] { 20, 20, 20, 512 };
@@ -67,7 +140,44 @@ namespace InvoiceBill.Basic
             return result;
         }
 
-
+        public static int ValidCustInfo(int InvType, DevExpress.XtraGrid.Views.Grid.GridView GridView1)
+        {
+            foreach (int i in GridView1.GetSelectedRows())
+            {
+                DataRow dr = GridView1.GetDataRow(i);;
+                if (
+                    (
+                        (InvType == 2)
+                        &&
+                        (
+                            (dr["TAXCUSTNAME"].ToString().Trim() == "")
+                            //|| (dr["TAXNO"].ToString().Trim() == "")
+                        )
+                        )
+                    )
+                {
+                    MessageBox.Show(dr["TAXCUSTNAME"] + "开票资料不完整！");
+                    return 1;
+                }
+                //专用发票
+                if (
+                    (InvType == 0) &&
+                    (
+                           (dr["TAXCUSTNAME"].ToString().Trim() == "")
+                        || (dr["TAXNO"].ToString().Trim() == "")
+                        || (dr["BANKNAME"].ToString().Trim() == "")
+                        || (dr["BANKACCOUNT"].ToString().Trim() == "")
+                        || (dr["ADDRESS"].ToString().Trim() == "")
+                        //|| (dr["CONTACTPHONE"].ToString().Trim() == "")
+                    )
+                    )
+                {
+                    MessageBox.Show(dr["TAXCUSTNAME"] + "开票资料不完整！");
+                    return 1;
+                }
+            }
+            return 0;
+        }
         public static string OperDataEx(string StoredProcedureName, string[] Parameters, string[] ParametersValue, string[] ParametersType, string[] ParametersDirection, out string[] ParametersOut)
         {
             string iResult;
@@ -154,7 +264,7 @@ namespace InvoiceBill.Basic
 
             string[] sParameters = new string[6] { "result", "@InvSeqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[6] { "0", sInvSeqId, sInvoiceCode, sInvoiceNo, "0", frmMain.sRetMsg };
+            string[] sParametersValue = new string[6] { "0", sInvSeqId, sInvoiceCode, sInvoiceNo, frmMain.sUserid, frmMain.sRetMsg };
             string[] sParametersType = new string[6] { "Int", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input", "Input", "Output" };
             int[] sParametersSize = new int[6] { 20, 20, 20, 20,20, 512 };
@@ -173,7 +283,7 @@ namespace InvoiceBill.Basic
 
             string[] sParameters = new string[6] { "result", "@InvSeqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[6] { "0", sInvSeqId, sInvoiceCode, sInvoiceNo, "0", frmMain.sRetMsg };
+            string[] sParametersValue = new string[6] { "0", sInvSeqId, sInvoiceCode, sInvoiceNo, frmMain.sUserid, frmMain.sRetMsg };
             string[] sParametersType = new string[6] { "Int", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input", "Input", "Output" };
             int[] sParametersSize = new int[6] { 20, 20, 20, 20, 20, 512 };
@@ -218,7 +328,7 @@ namespace InvoiceBill.Basic
 
             string[] sParameters = new string[4] { "result", "@InvseqId", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[4] { "0", sInvseqId, "0", frmMain.sRetMsg };
+            string[] sParametersValue = new string[4] { "0", sInvseqId, frmMain.sUserid, frmMain.sRetMsg };
             string[] sParametersType = new string[4] { "Int", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[4] { "ReturnValue", "Input", "Input", "Output" };
             int[] sParametersSize = new int[4] { 10, 20, 20, 512 };
@@ -234,7 +344,7 @@ namespace InvoiceBill.Basic
 
             string[] sParameters = new string[4] { "result", "@InvseqId", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[4] { "0", sInvseqId, "0", frmMain.sRetMsg };
+            string[] sParametersValue = new string[4] { "0", sInvseqId, frmMain.sUserid, frmMain.sRetMsg };
             string[] sParametersType = new string[4] { "Int", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[4] { "ReturnValue", "Input", "Input", "Output" };
             int[] sParametersSize = new int[4] { 10, 20, 20, 512 };

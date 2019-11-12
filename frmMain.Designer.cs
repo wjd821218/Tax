@@ -33,9 +33,11 @@
             this.meuInvoiceBill = new System.Windows.Forms.ToolStripMenuItem();
             this.按单快速开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.按客户汇总开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.按月汇总开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.销售发票开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.meuInovie = new System.Windows.Forms.ToolStripMenuItem();
+            this.按原单红字发票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.普通发票红字开票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.普通发票填开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +52,9 @@
             this.menuConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.税收分类编码维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开票资料维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.系统设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.角色管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblOpenTime = new System.Windows.Forms.Label();
             this.lblTaxNumber = new System.Windows.Forms.Label();
@@ -60,9 +65,14 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tColMain = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.cbbSkin = new DevExpress.XtraEditors.ComboBoxEdit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tColMain)).BeginInit();
+            this.tColMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbbSkin.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,10 +82,11 @@
             this.meuInvoiceBill,
             this.menuInvoiceManager,
             this.menuInvoicePrint,
-            this.menuConfig});
+            this.menuConfig,
+            this.系统设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(887, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(952, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -84,9 +95,11 @@
             this.meuInvoiceBill.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.按单快速开票ToolStripMenuItem,
             this.按客户汇总开票ToolStripMenuItem,
+            this.按月汇总开票ToolStripMenuItem,
             this.销售发票开票ToolStripMenuItem,
             this.toolStripSeparator1,
             this.meuInovie,
+            this.按原单红字发票ToolStripMenuItem,
             this.普通发票红字开票ToolStripMenuItem,
             this.toolStripSeparator2,
             this.普通发票填开ToolStripMenuItem,
@@ -101,7 +114,7 @@
             // 按单快速开票ToolStripMenuItem
             // 
             this.按单快速开票ToolStripMenuItem.Name = "按单快速开票ToolStripMenuItem";
-            this.按单快速开票ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.按单快速开票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.按单快速开票ToolStripMenuItem.Tag = "11";
             this.按单快速开票ToolStripMenuItem.Text = "按单快速开票";
             this.按单快速开票ToolStripMenuItem.Click += new System.EventHandler(this.按单快速开票ToolStripMenuItem_Click);
@@ -109,15 +122,23 @@
             // 按客户汇总开票ToolStripMenuItem
             // 
             this.按客户汇总开票ToolStripMenuItem.Name = "按客户汇总开票ToolStripMenuItem";
-            this.按客户汇总开票ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.按客户汇总开票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.按客户汇总开票ToolStripMenuItem.Tag = "12";
             this.按客户汇总开票ToolStripMenuItem.Text = "按客户汇总开票";
             this.按客户汇总开票ToolStripMenuItem.Click += new System.EventHandler(this.按客户汇总开票ToolStripMenuItem_Click);
             // 
+            // 按月汇总开票ToolStripMenuItem
+            // 
+            this.按月汇总开票ToolStripMenuItem.Name = "按月汇总开票ToolStripMenuItem";
+            this.按月汇总开票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.按月汇总开票ToolStripMenuItem.Tag = "111";
+            this.按月汇总开票ToolStripMenuItem.Text = "按月汇总开票";
+            this.按月汇总开票ToolStripMenuItem.Click += new System.EventHandler(this.按月汇总开票ToolStripMenuItem_Click);
+            // 
             // 销售发票开票ToolStripMenuItem
             // 
             this.销售发票开票ToolStripMenuItem.Name = "销售发票开票ToolStripMenuItem";
-            this.销售发票开票ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.销售发票开票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.销售发票开票ToolStripMenuItem.Tag = "13";
             this.销售发票开票ToolStripMenuItem.Text = "销售发票开票";
             this.销售发票开票ToolStripMenuItem.Click += new System.EventHandler(this.销售发票开票ToolStripMenuItem_Click);
@@ -125,49 +146,58 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(229, 6);
             this.toolStripSeparator1.Tag = "14";
             // 
             // meuInovie
             // 
             this.meuInovie.Name = "meuInovie";
-            this.meuInovie.Size = new System.Drawing.Size(196, 22);
+            this.meuInovie.Size = new System.Drawing.Size(232, 22);
             this.meuInovie.Tag = "15";
             this.meuInovie.Text = "普通发票红字发票开票";
             this.meuInovie.Click += new System.EventHandler(this.meuInovie_Click);
             // 
+            // 按原单红字发票ToolStripMenuItem
+            // 
+            this.按原单红字发票ToolStripMenuItem.Name = "按原单红字发票ToolStripMenuItem";
+            this.按原单红字发票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.按原单红字发票ToolStripMenuItem.Tag = "112";
+            this.按原单红字发票ToolStripMenuItem.Text = "按原单红字发票";
+            this.按原单红字发票ToolStripMenuItem.Click += new System.EventHandler(this.按原单红字发票ToolStripMenuItem_Click);
+            // 
             // 普通发票红字开票ToolStripMenuItem
             // 
             this.普通发票红字开票ToolStripMenuItem.Name = "普通发票红字开票ToolStripMenuItem";
-            this.普通发票红字开票ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.普通发票红字开票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.普通发票红字开票ToolStripMenuItem.Tag = "16";
-            this.普通发票红字开票ToolStripMenuItem.Text = "发票红字开票";
+            this.普通发票红字开票ToolStripMenuItem.Text = "发票红字开票（处理未作废）";
             this.普通发票红字开票ToolStripMenuItem.Click += new System.EventHandler(this.普通发票红字开票ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(193, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(229, 6);
             this.toolStripSeparator2.Tag = "17";
             // 
             // 普通发票填开ToolStripMenuItem
             // 
             this.普通发票填开ToolStripMenuItem.Name = "普通发票填开ToolStripMenuItem";
-            this.普通发票填开ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.普通发票填开ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.普通发票填开ToolStripMenuItem.Tag = "18";
             this.普通发票填开ToolStripMenuItem.Text = "普通发票填开";
+            this.普通发票填开ToolStripMenuItem.Click += new System.EventHandler(this.普通发票填开ToolStripMenuItem_Click);
             // 
             // 填制手工发票ToolStripMenuItem
             // 
             this.填制手工发票ToolStripMenuItem.Name = "填制手工发票ToolStripMenuItem";
-            this.填制手工发票ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.填制手工发票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.填制手工发票ToolStripMenuItem.Tag = "19";
             this.填制手工发票ToolStripMenuItem.Text = "专用发票填开";
             // 
             // 特殊红字开票ToolStripMenuItem
             // 
             this.特殊红字开票ToolStripMenuItem.Name = "特殊红字开票ToolStripMenuItem";
-            this.特殊红字开票ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.特殊红字开票ToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.特殊红字开票ToolStripMenuItem.Tag = "110";
             this.特殊红字开票ToolStripMenuItem.Text = "特殊红字开票";
             this.特殊红字开票ToolStripMenuItem.Click += new System.EventHandler(this.特殊红字开票ToolStripMenuItem_Click);
@@ -235,12 +265,11 @@
             this.menuConfig.Size = new System.Drawing.Size(68, 21);
             this.menuConfig.Tag = "4";
             this.menuConfig.Text = "开票设置";
-            this.menuConfig.Click += new System.EventHandler(this.menuConfig_Click);
             // 
             // 税收分类编码维护ToolStripMenuItem
             // 
             this.税收分类编码维护ToolStripMenuItem.Name = "税收分类编码维护ToolStripMenuItem";
-            this.税收分类编码维护ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.税收分类编码维护ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.税收分类编码维护ToolStripMenuItem.Tag = "41";
             this.税收分类编码维护ToolStripMenuItem.Text = "税收分类编码维护";
             this.税收分类编码维护ToolStripMenuItem.Click += new System.EventHandler(this.税收分类编码维护ToolStripMenuItem_Click);
@@ -248,10 +277,36 @@
             // 开票资料维护ToolStripMenuItem
             // 
             this.开票资料维护ToolStripMenuItem.Name = "开票资料维护ToolStripMenuItem";
-            this.开票资料维护ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.开票资料维护ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.开票资料维护ToolStripMenuItem.Tag = "42";
             this.开票资料维护ToolStripMenuItem.Text = "开票资料维护";
             this.开票资料维护ToolStripMenuItem.Click += new System.EventHandler(this.开票资料维护ToolStripMenuItem_Click);
+            // 
+            // 系统设置ToolStripMenuItem
+            // 
+            this.系统设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.用户管理ToolStripMenuItem,
+            this.角色管理ToolStripMenuItem});
+            this.系统设置ToolStripMenuItem.Name = "系统设置ToolStripMenuItem";
+            this.系统设置ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.系统设置ToolStripMenuItem.Tag = "5";
+            this.系统设置ToolStripMenuItem.Text = "系统设置";
+            // 
+            // 用户管理ToolStripMenuItem
+            // 
+            this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
+            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.用户管理ToolStripMenuItem.Tag = "51";
+            this.用户管理ToolStripMenuItem.Text = "用户管理";
+            this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
+            // 
+            // 角色管理ToolStripMenuItem
+            // 
+            this.角色管理ToolStripMenuItem.Name = "角色管理ToolStripMenuItem";
+            this.角色管理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.角色管理ToolStripMenuItem.Tag = "52";
+            this.角色管理ToolStripMenuItem.Text = "角色管理";
+            this.角色管理ToolStripMenuItem.Click += new System.EventHandler(this.角色管理ToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -267,7 +322,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(887, 56);
+            this.panel1.Size = new System.Drawing.Size(952, 56);
             this.panel1.TabIndex = 2;
             // 
             // lblOpenTime
@@ -352,11 +407,32 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.tColMain);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 81);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(887, 244);
+            this.panel2.Size = new System.Drawing.Size(952, 433);
             this.panel2.TabIndex = 3;
+            // 
+            // tColMain
+            // 
+            this.tColMain.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
+            this.tColMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tColMain.HeaderButtons = ((DevExpress.XtraTab.TabButtons)((DevExpress.XtraTab.TabButtons.Close | DevExpress.XtraTab.TabButtons.Default)));
+            this.tColMain.Location = new System.Drawing.Point(0, 0);
+            this.tColMain.Name = "tColMain";
+            this.tColMain.SelectedTabPage = this.xtraTabPage1;
+            this.tColMain.Size = new System.Drawing.Size(952, 433);
+            this.tColMain.TabIndex = 1;
+            this.tColMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1});
+            this.tColMain.CloseButtonClick += new System.EventHandler(this.tColMain_CloseButtonClick);
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(946, 404);
+            this.xtraTabPage1.Text = "导航";
             // 
             // cbbSkin
             // 
@@ -364,6 +440,7 @@
             this.cbbSkin.Name = "cbbSkin";
             this.cbbSkin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbSkin.Properties.LookAndFeel.SkinName = "Office 2010 Blue";
             this.cbbSkin.Size = new System.Drawing.Size(100, 20);
             this.cbbSkin.TabIndex = 4;
             this.cbbSkin.SelectedIndexChanged += new System.EventHandler(this.cbbSkin_SelectedIndexChanged);
@@ -372,7 +449,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 325);
+            this.ClientSize = new System.Drawing.Size(952, 514);
             this.Controls.Add(this.cbbSkin);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -387,6 +464,9 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tColMain)).EndInit();
+            this.tColMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cbbSkin.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -426,5 +506,12 @@
         private System.Windows.Forms.ToolStripMenuItem 税收分类编码维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 开票资料维护ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 特殊红字开票ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 按月汇总开票ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 按原单红字发票ToolStripMenuItem;
+        private DevExpress.XtraTab.XtraTabControl tColMain;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private System.Windows.Forms.ToolStripMenuItem 系统设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 角色管理ToolStripMenuItem;
     }
 }

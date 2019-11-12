@@ -36,21 +36,43 @@
     <ApplicationIcon>20181126085336769_easyicon_net_48.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.CodeParser.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v17.2.UI, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Images.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v17.2.UI, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v17.2.Extensions, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v17.2.Wizard, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPivotGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v17.2.Extensions, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraVerticalGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -70,11 +92,23 @@
   <ItemGroup>
     <Compile Include="Base64.cs" />
     <Compile Include="Basic\ComStruct.cs" />
+    <Compile Include="Basic\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Basic\frmBasicBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Basic\frmBasicBase.Designer.cs">
       <DependentUpon>frmBasicBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Basic\frmSelArt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Basic\frmSelArt.Designer.cs">
+      <DependentUpon>frmSelArt.cs</DependentUpon>
     </Compile>
     <Compile Include="Basic\frmSelCust.cs">
       <SubType>Form</SubType>
@@ -100,6 +134,7 @@
     <Compile Include="Basic\frmTaxArt.Designer.cs">
       <DependentUpon>frmTaxArt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Basic\Global.cs" />
     <Compile Include="Basic\HttpRequest.cs" />
     <Compile Include="Basic\PublicClass.cs" />
     <Compile Include="Basic\PublicUtility.cs" />
@@ -115,6 +150,12 @@
     <Compile Include="frmBase.Designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBillSumMonth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBillSumMonth.Designer.cs">
+      <DependentUpon>frmBillSumMonth.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBillSum.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +167,18 @@
     </Compile>
     <Compile Include="frmInvConfig.Designer.cs">
       <DependentUpon>frmInvConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoice.Designer.cs">
+      <DependentUpon>frmInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInvoiceNegativeBillExEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInvoiceNegativeBillExEx.Designer.cs">
+      <DependentUpon>frmInvoiceNegativeBillExEx.cs</DependentUpon>
     </Compile>
     <Compile Include="frmInvoiceNegativeBillEx.cs">
       <SubType>Form</SubType>
@@ -211,10 +264,45 @@
     <Compile Include="frmSpecialInvoice.Designer.cs">
       <DependentUpon>frmSpecialInvoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysManger\frmRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysManger\frmRole.Designer.cs">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysManger\frmRoleAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysManger\frmRoleAction.Designer.cs">
+      <DependentUpon>frmRoleAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysManger\frmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysManger\frmUser.Designer.cs">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysManger\frmUserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysManger\frmUserInfo.Designer.cs">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Basic\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Basic\frmBasicBase.resx">
       <DependentUpon>frmBasicBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Basic\frmSelArt.resx">
+      <DependentUpon>frmSelArt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Basic\frmSelCust.resx">
       <DependentUpon>frmSelCust.cs</DependentUpon>
@@ -231,11 +319,20 @@
     <EmbeddedResource Include="frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBillSumMonth.resx">
+      <DependentUpon>frmBillSumMonth.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBillSum.resx">
       <DependentUpon>frmBillSum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvConfig.resx">
       <DependentUpon>frmInvConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoice.resx">
+      <DependentUpon>frmInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInvoiceNegativeBillExEx.resx">
+      <DependentUpon>frmInvoiceNegativeBillExEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInvoiceNegativeBillEx.resx">
       <DependentUpon>frmInvoiceNegativeBillEx.cs</DependentUpon>
@@ -279,6 +376,7 @@
     <EmbeddedResource Include="frmSpecialInvoice.resx">
       <DependentUpon>frmSpecialInvoice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -289,6 +387,29 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SysManger\frmRole.resx">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysManger\frmRoleAction.resx">
+      <DependentUpon>frmRoleAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysManger\frmUser.resx">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysManger\frmUserInfo.resx">
+      <DependentUpon>frmUserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="InvoiceDataSet.xsc">
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="InvoiceDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="InvoiceDataSet.xss">
+      <DependentUpon>InvoiceDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -304,6 +425,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="20181126085336769_easyicon_net_48.ico" />
+    <None Include="Resources\export_32x32.png" />
+    <None Include="Resources\apply_32x32.png" />
+    <None Include="Resources\close_32x32.png" />
+    <None Include="Resources\show_32x32.png" />
+    <None Include="Resources\editname_32x32.png" />
+    <None Include="Resources\add_32x32.png" />
+    <None Include="Resources\convert_32x32.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pic\" />

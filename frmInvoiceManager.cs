@@ -22,6 +22,7 @@ namespace InvoiceBill
             InitializeComponent();
 
             fLoadInvoiceType();
+            fLoadDept();
         }
 
         private void fLoadInvoiceType()
@@ -32,6 +33,16 @@ namespace InvoiceBill
             cbbInvType.DataSource = GetDataTable(sInvoiceSql);
             cbbInvType.ValueMember = "INVTYPEID";
             cbbInvType.DisplayMember = "INVTYPENAME";
+
+        }
+        private void fLoadDept()
+        {
+            string sInvoiceSql =
+                "SELECT DEPTID,DEPTNAME FROM T_DEPT WHERE DEPTID IN ( " + frmMain.sPermsDept + ")";
+
+            cbbDept.DataSource = GetDataTable(sInvoiceSql);
+            cbbDept.ValueMember = "DEPTID";
+            cbbDept.DisplayMember = "DEPTNAME";
 
         }
         public DataTable GetDataTable(string SqlOraStr)
@@ -70,7 +81,7 @@ namespace InvoiceBill
         }
         public void GetData()
         {
-            string sDeptid = txtDept.Text.Trim();
+            string sDeptId = cbbDept.SelectedValue.ToString();
             string sCustId = txtCust.Text.Trim();
             string sInvoiceno = txtInvoiceNo.Text.Trim();
             string sInvTypeId = cbbInvType.SelectedValue.ToString();
@@ -79,11 +90,11 @@ namespace InvoiceBill
             string sDateFrom = dtpDateFrom.Value.ToString("yyyy-MM-dd");
             string sDateTo = dtpDateTo.Value.ToString("yyyy-MM-dd");
 
-            string[] sParameters = new string[5] { "@InvoiceNo", "@InvTypeId", "@CustName", "@BeginDate", "@EndDate" };
+            string[] sParameters = new string[6] { "@DeptId", "@InvoiceNo", "@InvTypeId", "@CustName", "@BeginDate", "@EndDate" };
 
-            string[] sParametersValue = new string[5] { sInvoiceno, sInvTypeId, sCustId, sDateFrom, sDateTo };
-            string[] sParametersType = new string[5] { "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
-            string[] sParametersDirection = new string[5] { "Input", "Input", "Input", "Input", "Input" };
+            string[] sParametersValue = new string[6] { sDeptId,sInvoiceno, sInvTypeId, sCustId, sDateFrom, sDateTo };
+            string[] sParametersType = new string[6] { "Int","VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
+            string[] sParametersDirection = new string[6] { "Input", "Input", "Input", "Input", "Input", "Input" };
 
             gridControl1.DataSource = GetDataTableBySp(spName, sParameters, sParametersValue, sParametersType, sParametersDirection);
         }
@@ -131,14 +142,21 @@ namespace InvoiceBill
         {
             int iResult = 0;
             int iMyRetrun = 0;
-
+            short iInfoKind = 0;
             int iCurrentItemId = gridView1.FocusedRowHandle;
 
             DataRow row = gridView1.GetDataRow(iCurrentItemId);
 
             string iCurrentBseqId = Convert.ToString(row["INVSEQID"]);
+
+            if (cbbInvType.SelectedValue.ToString() == "1")
+            {
+                iInfoKind = 0;
+            }
+            else
+                iInfoKind = 2;
             
-             iResult = frmMain.oComTaxCard.InvCancel(Convert.ToInt32(row["INVOICENO"]),Convert.ToString(row["INVOICECODE"]));
+            iResult = frmMain.oComTaxCard.InvCancel(iInfoKind,Convert.ToInt32(row["INVOICENO"]),Convert.ToString(row["INVOICECODE"]));
             if (iResult == 1)
             {
                 MessageBox.Show(frmMain.oComTaxCard.sRetMsg);
@@ -155,6 +173,7 @@ namespace InvoiceBill
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            short iInfoKind = 0;
             foreach (int i in gridView1.GetSelectedRows())
             {
                 DataRow row = gridView1.GetDataRow(i);
@@ -165,7 +184,13 @@ namespace InvoiceBill
                 short iInfoShowPrtDlg = 0;
                 if (chkShowPrint.Checked) iInfoShowPrtDlg = 1;
 
-                frmMain.oComTaxCard.InvPrint(int.Parse(sTypeNo), sTypeCode, 0, iInfoShowPrtDlg);
+                if (int.Parse(cbbInvType.SelectedValue.ToString()) == 2) frmMain.oComTaxCard.iInvType = 2;
+                if (int.Parse(cbbInvType.SelectedValue.ToString()) == 1) frmMain.oComTaxCard.iInvType = 0;
+
+                if (chkPrintList.Checked)  
+                    frmMain.oComTaxCard.InvPrint(int.Parse(sTypeNo), sTypeCode, 1, iInfoShowPrtDlg);
+                else
+                    frmMain.oComTaxCard.InvPrint(int.Parse(sTypeNo), sTypeCode, 0, iInfoShowPrtDlg);
 
                 PrintBill(sInvSeqid);
             }

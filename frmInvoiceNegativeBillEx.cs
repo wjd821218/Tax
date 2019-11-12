@@ -17,7 +17,7 @@ namespace InvoiceBill
     public partial class frmInvoiceNegativeBillEx : Form
     {
         public int iCurrentItemId = -1;
-        public string iCurrentBseqId = "";
+        public string sInvNo = "";
         public string sRetMsg = "";
         public string sCurrentInvSeqId = "";
         public frmInvoiceNegativeBillEx()
@@ -135,14 +135,15 @@ namespace InvoiceBill
             frmMain.oComTaxCard._InvocieHeader.sInfoClientAddressPhone = Convert.ToString(row["ADDRESS"]) + Convert.ToString(row["CONTACTPHONE"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoSellerBankAccount = ComStruct.sInfoSellerBankAccount;
             frmMain.oComTaxCard._InvocieHeader.sInfoSellerAddressPhone = ComStruct.sInfoSellerAddressPhone;
-            frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = short.Parse(Convert.ToString(row["TAXRATE"])); 
-            frmMain.oComTaxCard._InvocieHeader.sInfoNotes = "对应正数发票代码:"+Convert.ToString(row["INVOICECODE"])+
-                " 号码:" + Convert.ToString(row["INVOICENO"]);
+            frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = short.Parse(Convert.ToString(row["TAXRATE"]));
+            if (int.Parse(cbbInvType.SelectedValue.ToString()) == 2)
+                frmMain.oComTaxCard._InvocieHeader.sInfoNotes = "对应正数发票代码:" + Convert.ToString(row["INVOICECODE"]) +
+                "号码:" + Convert.ToString(row["INVOICENO"]);
+            else
+                frmMain.oComTaxCard._InvocieHeader.sInfoNotes = "开具红字增值税专用发票信息表编号: " + Convert.ToString(row["NOTES"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoInvoicer = frmMain.sTrueName; //开票员
             frmMain.oComTaxCard._InvocieHeader.sInfoChecker = txtChecker.Text.Trim(); //复核员
             frmMain.oComTaxCard._InvocieHeader.sInfoCashier = txtCashier.Text.Trim(); //
-            //if (iTaxDetailCount > 8) frmMain.oComTaxCard._InvocieHeader.sInfoListName = "详见销货清单";
-            //frmMain.oComTaxCard._InvocieHeader.sInfoBillNumber = Convert.ToString(row["BSEQID"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoBillNumber = "";
 
             return 0;
@@ -154,6 +155,7 @@ namespace InvoiceBill
             myDt = PublicUtility.InvoiceBillDetail(sCurrentInvSeqId);
             int iTaxDetailCount = myDt.Rows.Count;
             //条目数大于8
+            frmMain.oComTaxCard._InvocieHeader.sInfoListName = "";
             if (iTaxDetailCount > 8) frmMain.oComTaxCard._InvocieHeader.sInfoListName = "详见销货清单";
 
             if (iTaxDetailCount > 0)
@@ -169,7 +171,7 @@ namespace InvoiceBill
 
 
         }
-        public int InvoiceBill(string sBseqId, string sUserId)
+        public int InvoiceBill(string sInvNo, string sUserId)
         {
             int iResult = 0;
             sRetMsg = "";
@@ -177,9 +179,9 @@ namespace InvoiceBill
 
             string spName = "p_fin_invoice_bill_Negative_Ex";
 
-            string[] sParameters = new string[5] { "result", "@BseqId", "@UserId", "@InvSeqId", "@Msg" };
+            string[] sParameters = new string[5] { "result", "@InvNo", "@UserId", "@InvSeqId", "@Msg" };
 
-            string[] sParametersValue = new string[5] { "",sBseqId,"0","","" };
+            string[] sParametersValue = new string[5] { "", sInvNo, frmMain.sUserid,"","" };
             string[] sParametersType = new string[5] { "VarChar", "VarChar", "VarChar","Int", "VarChar" };
             string[] sParametersDirection = new string[5] { "ReturnValue", "Input", "Input" , "Output", "Output" };
             int[] sParametersSize = new int[5] { 20, 20, 20,20,512 };
@@ -198,9 +200,9 @@ namespace InvoiceBill
 
                 DataRow row = gridView1.GetDataRow(iCurrentItemId);
 
-                iCurrentBseqId = Convert.ToString(row["BSEQID"]);
+                sInvNo = Convert.ToString(row["INVOICENO"]);
 
-                if (InvoiceBill(iCurrentBseqId, "0") == -1) { MessageBox.Show(sRetMsg); return 1; }
+                if (InvoiceBill(sInvNo, "0") == -1) { MessageBox.Show(sRetMsg); return 1; }
 
                 if (InvoiceBillHeader(iCurrentItemId) == -1) { MessageBox.Show(sRetMsg); return 1; }
                 if (InvoiceBillDetail(iCurrentItemId) == 1) { MessageBox.Show(sRetMsg); return 1; }
@@ -227,6 +229,7 @@ namespace InvoiceBill
                 }
 
             }
+            
             return 0;
         }
     
@@ -235,6 +238,7 @@ namespace InvoiceBill
             //Invoice();
 
             if (Invoice() == 1) MessageBox.Show(sRetMsg); 
+
         }
 
         private void cbbInvType_SelectedIndexChanged(object sender, EventArgs e)
@@ -245,6 +249,11 @@ namespace InvoiceBill
             }
             else
                 frmMain.oComTaxCard.iInvType = 2;
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

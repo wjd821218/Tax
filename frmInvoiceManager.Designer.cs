@@ -51,10 +51,11 @@
             this.gColNotes = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtDept = new System.Windows.Forms.TextBox();
             this.txtCust = new System.Windows.Forms.TextBox();
             this.btnQuery = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkPrintList = new System.Windows.Forms.CheckBox();
+            this.cbbDept = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.chkShowPrint = new System.Windows.Forms.CheckBox();
             this.chkPrint = new System.Windows.Forms.CheckBox();
@@ -78,7 +79,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "开票员";
-            this.gridColumn6.FieldName = "WRITERUID";
+            this.gridColumn6.FieldName = "USERNAME";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 9;
@@ -276,13 +277,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "部门：";
             // 
-            // txtDept
-            // 
-            this.txtDept.Location = new System.Drawing.Point(56, 56);
-            this.txtDept.Name = "txtDept";
-            this.txtDept.Size = new System.Drawing.Size(244, 21);
-            this.txtDept.TabIndex = 2;
-            // 
             // txtCust
             // 
             this.txtCust.Location = new System.Drawing.Point(56, 20);
@@ -303,6 +297,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkPrintList);
+            this.panel1.Controls.Add(this.cbbDept);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.chkShowPrint);
             this.panel1.Controls.Add(this.chkPrint);
@@ -318,7 +314,6 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.dtpDateFrom);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txtDept);
             this.panel1.Controls.Add(this.txtCust);
             this.panel1.Controls.Add(this.btnQuery);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -326,6 +321,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(912, 111);
             this.panel1.TabIndex = 3;
+            // 
+            // chkPrintList
+            // 
+            this.chkPrintList.AutoSize = true;
+            this.chkPrintList.Location = new System.Drawing.Point(441, 82);
+            this.chkPrintList.Name = "chkPrintList";
+            this.chkPrintList.Size = new System.Drawing.Size(72, 16);
+            this.chkPrintList.TabIndex = 27;
+            this.chkPrintList.Text = "打印清单";
+            this.chkPrintList.UseVisualStyleBackColor = true;
+            // 
+            // cbbDept
+            // 
+            this.cbbDept.FormattingEnabled = true;
+            this.cbbDept.Location = new System.Drawing.Point(56, 57);
+            this.cbbDept.Name = "cbbDept";
+            this.cbbDept.Size = new System.Drawing.Size(244, 20);
+            this.cbbDept.TabIndex = 26;
             // 
             // button1
             // 
@@ -423,7 +436,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColNotes;
         private System.Windows.Forms.DateTimePicker dtpDateFrom;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDept;
         private System.Windows.Forms.TextBox txtCust;
         private System.Windows.Forms.Button btnQuery;
         private System.Windows.Forms.Panel panel1;
@@ -438,5 +450,7 @@
         private System.Windows.Forms.CheckBox chkPrint;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cbbDept;
+        private System.Windows.Forms.CheckBox chkPrintList;
     }
 }

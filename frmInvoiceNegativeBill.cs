@@ -135,9 +135,12 @@ namespace InvoiceBill
             frmMain.oComTaxCard._InvocieHeader.sInfoClientAddressPhone = Convert.ToString(row["ADDRESS"]) + Convert.ToString(row["CONTACTPHONE"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoSellerBankAccount = ComStruct.sInfoSellerBankAccount;
             frmMain.oComTaxCard._InvocieHeader.sInfoSellerAddressPhone = ComStruct.sInfoSellerAddressPhone;
-            frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = short.Parse(Convert.ToString(row["TAXRATE"])); 
-            frmMain.oComTaxCard._InvocieHeader.sInfoNotes = "对应正数发票代码:"+Convert.ToString(row["INVOICECODE"])+
-                " 号码:" + Convert.ToString(row["INVOICENO"]);
+            frmMain.oComTaxCard._InvocieHeader.iInfoTaxRate = short.Parse(Convert.ToString(row["TAXRATE"]));
+            if (int.Parse(cbbInvType.SelectedValue.ToString()) == 2)
+                frmMain.oComTaxCard._InvocieHeader.sInfoNotes = "对应正数发票代码:" + Convert.ToString(row["INVOICECODE"]) +
+                "号码:" + Convert.ToString(row["INVOICENO"]);
+            else
+                frmMain.oComTaxCard._InvocieHeader.sInfoNotes = "开具红字增值税专用发票信息表编号: " + Convert.ToString(row["NOTES"]);
             frmMain.oComTaxCard._InvocieHeader.sInfoInvoicer = frmMain.sTrueName; //开票员
             frmMain.oComTaxCard._InvocieHeader.sInfoChecker = txtChecker.Text.Trim(); //复核员
             frmMain.oComTaxCard._InvocieHeader.sInfoCashier = txtCashier.Text.Trim(); //
@@ -179,7 +182,7 @@ namespace InvoiceBill
 
             string[] sParameters = new string[5] { "result", "@BseqId", "@UserId", "@InvSeqId", "@Msg" };
 
-            string[] sParametersValue = new string[5] { "",sBseqId,"0","","" };
+            string[] sParametersValue = new string[5] { "",sBseqId, frmMain.sUserid, "","" };
             string[] sParametersType = new string[5] { "VarChar", "VarChar", "VarChar","Int", "VarChar" };
             string[] sParametersDirection = new string[5] { "ReturnValue", "Input", "Input" , "Output", "Output" };
             int[] sParametersSize = new int[5] { 20, 20, 20,20,512 };
@@ -240,7 +243,7 @@ namespace InvoiceBill
 
             string[] sParameters = new string[6] { "result", "@InvseqId", "@InvoiceCode", "@InvoiceNumber", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[6] { "0", sCurrentInvSeqId.ToString(), sInvoiceCode, sInvoiceNo, "0", sRetMsg };
+            string[] sParametersValue = new string[6] { "0", sCurrentInvSeqId.ToString(), sInvoiceCode, sInvoiceNo, frmMain.sUserid, sRetMsg };
             string[] sParametersType = new string[6] { "Int", "VarChar", "VarChar", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input", "Input", "Output" };
             int[] sParametersSize = new int[6] { 10, 20, 20, 20, 20, 512 };
@@ -257,7 +260,7 @@ namespace InvoiceBill
 
             string[] sParameters = new string[4] { "result", "@InvseqId", "@UserId", "@Msg" };
 
-            string[] sParametersValue = new string[4] { "0", sCurrentInvSeqId.ToString(), "0", sRetMsg };
+            string[] sParametersValue = new string[4] { "0", sCurrentInvSeqId.ToString(), frmMain.sUserid, sRetMsg };
             string[] sParametersType = new string[4] { "Int", "VarChar", "VarChar", "VarChar" };
             string[] sParametersDirection = new string[4] { "ReturnValue", "Input", "Input", "Output" };
             int[] sParametersSize = new int[4] { 10, 20, 20, 512 };

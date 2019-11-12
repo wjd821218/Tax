@@ -290,7 +290,7 @@ namespace InvoiceBill
 
             string[] sParameters = new string[6] { "result", "@Xml", "@InvoiceType", "@UserId", "@InvSeqId", "@Msg" };
 
-            string[] sParametersValue = new string[6] {"0", sXml, sInvTypeId, "0", "", sRetMsg };
+            string[] sParametersValue = new string[6] {"0", sXml, sInvTypeId, frmMain.sUserid, "", sRetMsg };
             string[] sParametersType = new string[6] { "Int","VarChar", "Int", "VarChar", "Int", "VarChar" };
             string[] sParametersDirection = new string[6] { "ReturnValue", "Input", "Input", "Input", "Output", "Output" };
             int[] sParametersSize = new int[6] {10, sXml.Length, 20, 20, 20, 512 };
